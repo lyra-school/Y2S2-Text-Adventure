@@ -6,7 +6,31 @@
         xmlns:local="clr-namespace:Y2S2_Text_Adventure"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <ContentPresenter x:Name="presenterWindow" Content="{Binding }"/>
+    <DataTemplate>
+        
+    </DataTemplate>
+    <Grid x:Name="gridMenu">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+            <Button x:Name="btnStart" Content="Start"/>
+            <Button Content=""/>
+            <Button/>
+            <Button/>
+        </StackPanel>
+        <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+    <Grid x:Name="gridGame">
         
     </Grid>
 </Window>

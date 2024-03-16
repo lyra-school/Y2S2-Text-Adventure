@@ -26,7 +26,7 @@
                         <Setter Property="Padding" Value="5"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Name="btnStart" Content="Start"/>
+                <Button x:Name="btnStart" Content="Start" Click="btnStart_Click"/>
                 <Button x:Name="btnHow" Content="How to Play" Click="btnHow_Click"/>
                 <Button x:Name="btnAbout" Content="About" Click="btnAbout_Click"/>
                 <Button x:Name="btnVerify" Content="Verify Game Data"/>
@@ -42,7 +42,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2">
                 <TextBlock x:Name="tblkGame" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
@@ -50,7 +50,7 @@
                 </TextBlock>
             </ScrollViewer>
             <Border Grid.Column="1" Grid.Row="2">
-                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}"/>
+                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
             </Border>
             <TextBlock x:Name="tblkStats" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
@@ -58,8 +58,8 @@
             <TextBlock x:Name="tblkInventory" Grid.Column="2" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
             </TextBlock>
-            <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click"/>
+            <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click"/>
         </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -87,7 +87,7 @@
                     <Run Text="without a target to examine the scene again. For the rest, the target is an object or character you want to interact with. You can append"/>
                     <Run FontWeight="Bold" Text="WITH [item]"/>
                     <Run Text="to some commands to use a specific item."/>
-                    <Run Text="&#x0a;&#x0a;All available commands are on the right. At this time, the program doesn't support chaining commands in one send, e.g. 'go west AND take hammer', rather, each command must be sent separately. No command has an alias."/>
+                    <Run Text="&#x0a;&#x0a;All available commands are on the right. At this time, the program doesn't support chaining commands in one send, e.g. 'go west AND take hammer', rather, each command must be sent separately."/>
                     <Run Text="&#x0a;&#x0a;On the game screen, buttons on the left and right are used to toggle the statistics menu and inventory, respectively."/>
                     <Run Text="&#x0a;&#x0a;In certain situations, the prompt turns into a list of dialogue choices! In that case, you must click on one to proceed."/>
                 </TextBlock.Inlines>

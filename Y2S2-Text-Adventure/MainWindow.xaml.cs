@@ -48,5 +48,39 @@ namespace Y2S2_Text_Adventure
             gridMenu.Visibility = Visibility.Visible;
             gridAbout.Visibility = Visibility.Collapsed;
         }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            gridMenu.Visibility = Visibility.Collapsed;
+            gridGame.Visibility = Visibility.Visible;
+        }
+
+        private void btnStats_Click(object sender, RoutedEventArgs e)
+        {
+            if(tblkStats.Visibility == Visibility.Visible)
+            {
+                tblkStats.Visibility = Visibility.Collapsed;
+            } else
+            {
+                tblkStats.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnInventory_Click(object sender, RoutedEventArgs e)
+        {
+            if(tblkInventory.Visibility == Visibility.Visible)
+            {
+                tblkInventory.Visibility = Visibility.Collapsed;
+            } else
+            {
+                tblkInventory.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tbxPrompt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxPrompt.FontStyle = FontStyles.Normal;
+            tbxPrompt.Text = "";
+        }
     }
 }

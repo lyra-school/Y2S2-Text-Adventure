@@ -24,5 +24,11 @@ namespace Y2S2_Text_Adventure
         {
             InitializeComponent();
         }
+
+        private void btnHow_Click(object sender, RoutedEventArgs e)
+        {
+            gridMenu.Visibility = Visibility.Collapsed;
+            gridHowto.Visibility = Visibility.Visible;
+        }
     }
 }

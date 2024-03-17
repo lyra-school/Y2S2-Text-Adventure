@@ -87,6 +87,8 @@
                     <Run Text="without a target to examine the scene again. For the rest, the target is an object or character you want to interact with. You can append"/>
                     <Run FontWeight="Bold" Text="WITH [item]"/>
                     <Run Text="to some commands to use a specific item."/>
+                    <Run FontWeight="Bold" Text="USE"/>
+                    <Run Text="is a generic command for situations where none other apply."/>
                     <Run Text="&#x0a;&#x0a;All available commands are on the right. At this time, the program doesn't support chaining commands in one send, e.g. 'go west AND take hammer', rather, each command must be sent separately."/>
                     <Run Text="&#x0a;&#x0a;On the game screen, buttons on the left and right are used to toggle the statistics menu and inventory, respectively."/>
                     <Run Text="&#x0a;&#x0a;In certain situations, the prompt turns into a list of dialogue choices! In that case, you must click on one to proceed."/>
@@ -101,6 +103,7 @@
                         <Run Text="&#x0a;- LOOK"/>
                         <Run Text="&#x0a;- TAKE"/>
                         <Run Text="&#x0a;- TALK"/>
+                        <Run Text="&#x0a;- USE"/>
                     </TextBlock.Inlines>
                 </TextBlock>
             </Border>

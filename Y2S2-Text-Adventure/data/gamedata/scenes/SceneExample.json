@@ -1,0 +1,8 @@
+{
+  "Name": "SceneExample",
+  "Heading": "Stylized name of the scene used in transitions",
+  "Description": "This is accessed by either LOOK on its own when in a given scene or when the scene is visited through GO/an advance interaction.",
+  "NeighboringScenes": [ "SceneExample2" ],
+  "Directions": [ "WEST" ],
+  "Items": ["InvExample", "StaticExample"]
+}

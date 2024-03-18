@@ -21,7 +21,7 @@
     "Description": "You took this object.",
     "Consequence": "NONE"
   },
-  "Use": {
+  "UseInteraction": {
     "Description": "You used this object.",
     "Consequence": "NONE"
   },

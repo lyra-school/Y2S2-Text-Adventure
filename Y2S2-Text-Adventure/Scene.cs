@@ -19,6 +19,17 @@ namespace Y2S2_Text_Adventure
     }
     internal class Scene
     {
+        private class SceneConnection
+        {
+            public string SceneName { get; set; }
+            public Direction Direction { get; set; }
+
+            public SceneConnection(string sceneName, Direction direction)
+            {
+                SceneName = sceneName;
+                Direction = direction;
+            }
+        }
         public string Name { get; set; }
         public string Heading { get; set; }
         public string Description { get; set; }

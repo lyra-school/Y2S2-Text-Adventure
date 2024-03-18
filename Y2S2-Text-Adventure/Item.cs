@@ -25,6 +25,11 @@ namespace Y2S2_Text_Adventure
         HEALTH,
         WILL
     }
+    internal enum ItemType
+    {
+        INVENTORY,
+        STATIC
+    }
     internal class Item
     {
         public class Interaction
@@ -78,8 +83,16 @@ namespace Y2S2_Text_Adventure
         public string Name { get; set; }
         public string Description { get; set; }
         public string InSceneDescription { get; set; }
+        public ItemType Type { get; set; }
         public HashSet<Interaction> Interactions { get; set; }
 
+        public Item(string name, string desc, string insc, ItemType type)
+        {
+            Name = name;
+            Description = desc;
+            InSceneDescription = insc;
+            Type = type;
+        }
         public void AddInteraction(Command cmd, string desc, string sndItem)
         {
             Interactions.Add(new Interaction(cmd, desc, sndItem));

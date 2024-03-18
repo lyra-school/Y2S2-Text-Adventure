@@ -3,29 +3,33 @@
   "Description": "This description appears when used with LOOK.",
   "Type": "STATIC",
   "InSceneDescription": "This description is not used in this type of object. Static objects should be part of the scene's descrption.",
-  "AttackInteraction": {
-    "Description": "You attacked this object.",
-    "Consequence": "STAT_CHANGE",
-    "Penalty": "HEALTH",
-    "PenaltyAmount": -1,
-    "PenaltyChance": 0.5
-  },
-  "EatInteraction": {
-    "Description": "You ate this object.",
-    "Consequence": "STATUS",
-    "Penalty": "POISON",
-    "PenaltyAmount": -1,
-    "PenaltyLength": 10
-  },
-  "TakeInteraction": {
-    "Description": "You took this object.",
-    "Consequence": "NONE"
-  },
-  "UseInteraction": {
-    "Description": "You used this object.",
-    "Consequence": "NONE"
-  },
-  "SpecialInteractions": [
+  "Interactions": [
+    {
+      "Action": "ATTACK",
+      "Description": "You attacked this object.",
+      "Consequence": "STAT_CHANGE",
+      "Penalty": "HEALTH",
+      "PenaltyAmount": -1,
+      "PenaltyChance": 0.5
+    },
+    {
+      "Action": "EAT",
+      "Description": "You ate this object.",
+      "Consequence": "STATUS",
+      "Penalty": "POISON",
+      "PenaltyAmount": -1,
+      "PenaltyLength": 10
+    },
+    {
+      "Action": "TAKE",
+      "Description": "You took this object.",
+      "Consequence": "NONE"
+    },
+    {
+      "Action": "USE",
+      "Description": "You used this object.",
+      "Consequence": "NONE"
+    },
     {
       "Action": "USE",
       "SecondTarget": "InvExample",

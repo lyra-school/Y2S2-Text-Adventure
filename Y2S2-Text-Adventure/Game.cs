@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,18 +37,66 @@ namespace Y2S2_Text_Adventure
                 for(int i = 0; i < deserializedScene.NeighboringScenes.Length; i++)
                 {
                     Direction dir;
-                    Enum.TryParse(deserializedScene.Directions[i], out dir);
+                    bool success = Enum.TryParse(deserializedScene.Directions[i], out dir);
+                    if(!success)
+                    {
+                        throw new ArgumentException("Found unrecognized direction: " + deserializedScene.Directions[i]);
+                    }
                     sc.AddConnection(deserializedScene.NeighboringScenes[i], dir);
+                }
+                ReadAppropriateItems(sc, deserializedScene.Items);
+            }
+        }
+        public void ReadAppropriateItems(Scene sc, string[] itemKeys)
+        {
+            string[] filenames = Directory.GetFiles("../../data/gamedata/items");
+            for (int i = 0; i < filenames.Length; i++)
+            {
+                JObject item = JObject.Parse(filenames[i]);
+                for(int j = 0; j < itemKeys.Length; j++)
+                {
+                    if (item["Name"].Equals(itemKeys[j]))
+                    {
+                        string name = item["Name"].ToString();
+                        string desc = item["Description"].ToString();
+                        string type = item["Type"].ToString();
+                        string insc = item["InSceneDescription"].ToString();
+                        ItemType ttype;
+                        bool success = Enum.TryParse(type, out ttype);
+                        if(!success)
+                        {
+                            throw new ArgumentException("Unrecognized item type: " + type);
+                        }
+                        Item it = new Item(name, desc, insc, ttype);
+                        LoadInteraction(it, Command.ATTACK, item["AttackInteraction"]);
+                        LoadInteraction(it, Command.EAT, item["EatInteraction"]);
+                        LoadInteraction(it, Command.TAKE, item["TakeInteraction"]);
+                        LoadInteraction(it, Command.USE, item["UseInteraction"]);
+                        List<JToken> results = item["SpecialInteractions"].Children().ToList();
+                        foreach(JToken token in results)
+                        {
+                            LoadSpecialInteraction(it, token);
+                        }
+                    }
                 }
             }
         }
-        public void ReadAppropriateItems()
+        public void LoadInteraction(Item it, Command cmd, JToken interaction)
         {
-            foreach(string filename in Directory.GetFiles("../../data/gamedata/items"))
+            string cons = interaction["Consequence"].ToString();
+            Effect ef;
+            bool success = Enum.TryParse(cons, out ef);
+            if(!success)
             {
-
+                throw new ArgumentException("Unrecognized item effect: " + cons);
             }
+
         }
+        public void LoadSpecialInteraction(Item it, JToken interaction)
+        {
+
+        }
+        /*
         public string CommandFeedback(string command)
         {
             string[] commandComponents = command.Split(' ');
@@ -62,5 +111,6 @@ namespace Y2S2_Text_Adventure
 
             }
         }
+        */
     }
 }

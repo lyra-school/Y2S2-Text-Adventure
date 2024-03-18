@@ -32,6 +32,7 @@
     },
     {
       "Action": "USE",
+      "Description": "You used this object with another object.",
       "SecondTarget": "InvExample",
       "Consequence": "ADVANCE",
       "Penalty": "SceneExample2"

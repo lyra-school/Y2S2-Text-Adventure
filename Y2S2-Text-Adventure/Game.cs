@@ -68,20 +68,16 @@ namespace Y2S2_Text_Adventure
                             throw new ArgumentException("Unrecognized item type: " + type);
                         }
                         Item it = new Item(name, desc, insc, ttype);
-                        LoadInteraction(it, Command.ATTACK, item["AttackInteraction"]);
-                        LoadInteraction(it, Command.EAT, item["EatInteraction"]);
-                        LoadInteraction(it, Command.TAKE, item["TakeInteraction"]);
-                        LoadInteraction(it, Command.USE, item["UseInteraction"]);
-                        List<JToken> results = item["SpecialInteractions"].Children().ToList();
+                        List<JToken> results = item["Interactions"].Children().ToList();
                         foreach(JToken token in results)
                         {
-                            LoadSpecialInteraction(it, token);
+                            LoadInteraction(it, token);
                         }
                     }
                 }
             }
         }
-        public void LoadInteraction(Item it, Command cmd, JToken interaction)
+        public void LoadInteraction(Item it, JToken interaction)
         {
             string cons = interaction["Consequence"].ToString();
             Effect ef;
@@ -90,11 +86,25 @@ namespace Y2S2_Text_Adventure
             {
                 throw new ArgumentException("Unrecognized item effect: " + cons);
             }
-
-        }
-        public void LoadSpecialInteraction(Item it, JToken interaction)
-        {
-
+            Command act;
+            string action = interaction["Action"].ToString();
+            bool success2 = Enum.TryParse(action, out act);
+            if(!success2)
+            {
+                throw new ArgumentException("Unrecognized action/command: " + action);
+            }
+            switch(ef)
+            {
+                case Effect.NONE:
+                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString());
+                    return;
+                case Effect.ADVANCE:
+                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), interaction["Penalty"].ToString());
+                    return;
+                case Effect.STATUS:
+                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString());
+                    break;
+            }
         }
         /*
         public string CommandFeedback(string command)

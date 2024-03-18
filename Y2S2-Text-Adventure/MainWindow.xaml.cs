@@ -20,6 +20,7 @@ namespace Y2S2_Text_Adventure
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Game _game = new Game();
         public MainWindow()
         {
             InitializeComponent();

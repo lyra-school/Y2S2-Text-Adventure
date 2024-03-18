@@ -5,7 +5,8 @@
   "InSceneDescription": "This description is only used by INVENTORY objects and appears in a scene before being picked up.",
   "AttackInteraction": {
     "Description": "You attacked this object.",
-    "Consequence": "HEALTH",
+    "Consequence": "STAT_CHANGE",
+    "Penalty": "HEALTH",
     "PenaltyAmount": -1,
     "PenaltyChance": 0.5
   },
@@ -20,6 +21,6 @@
   },
   "UseInteraction": {
     "Description": "You used this object.",
-    "Consequence": "None"
+    "Consequence": "NONE"
   }
 }

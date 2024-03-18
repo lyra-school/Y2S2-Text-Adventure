@@ -5,7 +5,8 @@
   "InSceneDescription": "This description is not used in this type of object. Static objects should be part of the scene's descrption.",
   "AttackInteraction": {
     "Description": "You attacked this object.",
-    "Consequence": "HEALTH",
+    "Consequence": "STAT_CHANGE",
+    "Penalty": "HEALTH",
     "PenaltyAmount": -1,
     "PenaltyChance": 0.5
   },

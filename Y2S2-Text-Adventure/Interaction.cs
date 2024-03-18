@@ -29,10 +29,10 @@ namespace Y2S2_Text_Adventure
     internal class StatusInteraction : Interaction
     {
         public StatusEffect Status { get; set; }
-        public double? Amount { get; set; }
+        public double Amount { get; set; }
         public double Chance { get; set; }
         public int Duration { get; set; }
-        public StatusInteraction(Command associatedCommand, string description, string secondItem, StatusEffect status, double? amount, double chance, int duration) : base(associatedCommand, description, secondItem)
+        public StatusInteraction(Command associatedCommand, string description, string secondItem, StatusEffect status, double amount, double chance, int duration) : base(associatedCommand, description, secondItem)
         {
             Status = status;
             Amount = amount;

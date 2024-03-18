@@ -102,8 +102,29 @@ namespace Y2S2_Text_Adventure
                     it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), interaction["Penalty"].ToString());
                     return;
                 case Effect.STATUS:
+                    StatusEffect statusEffect;
+                    bool success3 = Enum.TryParse(interaction["Penalty"].ToString(), out statusEffect);
+                    if(!success3)
+                    {
+                        throw new ArgumentException("Unrecognized status effect:" + interaction["Penalty"].ToString());
+                    }
+                    double amt;
+                    string a = interaction["PenaltyAmount"].ToString();
+                    if(String.IsNullOrEmpty(a))
+                    {
+                        a = "0";
+                    }
+                    amt = double.Parse(a);
+                    double chance;
+                    string b = interaction["PenaltyChance"].ToString();
+                    if(String.IsNullOrEmpty(b))
+                    {
+                        b = "1";
+                    }
+                    chance = double.Parse(b);
+                    int length = int.Parse(interaction["PenaltyLength"].ToString());
                     it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString());
-                    break;
+                    return;
             }
         }
         /*

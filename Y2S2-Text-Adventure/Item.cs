@@ -53,7 +53,7 @@ namespace Y2S2_Text_Adventure
         {
             Interactions.Add(new AdvanceInteraction(cmd, desc, sndItem, target));
         }
-        public void AddInteraction(Command cmd, string desc, string sndItem, StatusEffect status, double? amount, double chance, int duration)
+        public void AddInteraction(Command cmd, string desc, string sndItem, StatusEffect status, double amount, double chance, int duration)
         {
             Interactions.Add(new StatusInteraction(cmd, desc, sndItem, status, amount, chance, duration));
         }

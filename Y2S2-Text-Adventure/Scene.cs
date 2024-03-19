@@ -59,5 +59,16 @@ namespace Y2S2_Text_Adventure
         {
             _items.Remove(item);
         }
+        public string GetConnectionName(Direction direction)
+        {
+            foreach(SceneConnection connection in _connections)
+            {
+                if(connection.Direction == direction)
+                {
+                    return connection.SceneName;
+                }
+            }
+            return null;
+        }
     }
 }

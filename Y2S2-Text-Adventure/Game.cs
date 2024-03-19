@@ -30,8 +30,14 @@ namespace Y2S2_Text_Adventure
 
         public void ReadScenes()
         {
-            foreach(string filename in Directory.GetFiles("../../data/gamedata/scenes")) {
-                SceneData deserializedScene = JsonConvert.DeserializeObject<SceneData>(filename);
+            string[] paths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\scenes"));
+            foreach (string filename in paths) {
+                SceneData deserializedScene;
+                using (StreamReader r = new StreamReader(filename))
+                {
+                    string json = r.ReadToEnd();
+                    deserializedScene = JsonConvert.DeserializeObject<SceneData>(json);
+                }
                 Scene sc = new Scene(deserializedScene.Name, deserializedScene.Heading, deserializedScene.Description);
                 _scenes.Add(sc);
                 for(int i = 0; i < deserializedScene.NeighboringScenes.Length; i++)
@@ -49,10 +55,19 @@ namespace Y2S2_Text_Adventure
         }
         public void ReadAppropriateItems(Scene sc, string[] itemKeys)
         {
-            string[] filenames = Directory.GetFiles("../../data/gamedata/items");
-            for (int i = 0; i < filenames.Length; i++)
+            string[] paths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\items"));
+            List<string> jsons = new List<string>();
+            foreach(string path in paths)
             {
-                JObject item = JObject.Parse(filenames[i]);
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    jsons.Add(json);
+                }
+            }
+            for (int i = 0; i < jsons.Count; i++)
+            {
+                JObject item = JObject.Parse(jsons[i]);
                 for(int j = 0; j < itemKeys.Length; j++)
                 {
                     if (item["Name"].Equals(itemKeys[j]))
@@ -68,6 +83,7 @@ namespace Y2S2_Text_Adventure
                             throw new ArgumentException("Unrecognized item type: " + type);
                         }
                         Item it = new Item(name, desc, insc, ttype);
+                        sc.AddItem(it);
                         List<JToken> results = item["Interactions"].Children().ToList();
                         foreach(JToken token in results)
                         {
@@ -123,7 +139,30 @@ namespace Y2S2_Text_Adventure
                     }
                     chance = double.Parse(b);
                     int length = int.Parse(interaction["PenaltyLength"].ToString());
-                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString());
+                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), statusEffect, amt, chance, length);
+                    return;
+                case Effect.STAT_CHANGE:
+                    Statistic stat;
+                    bool success4 = Enum.TryParse(interaction["Penalty"].ToString(), out stat);
+                    if (!success4)
+                    {
+                        throw new ArgumentException("Unrecognized status effect:" + interaction["Penalty"].ToString());
+                    }
+                    double amt2;
+                    string a2 = interaction["PenaltyAmount"].ToString();
+                    if (String.IsNullOrEmpty(a2))
+                    {
+                        a2 = "0";
+                    }
+                    amt2 = double.Parse(a2);
+                    double chance2;
+                    string b2 = interaction["PenaltyChance"].ToString();
+                    if (String.IsNullOrEmpty(b2))
+                    {
+                        b2 = "1";
+                    }
+                    chance2 = double.Parse(b2);
+                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), stat, amt2, chance2);
                     return;
             }
         }

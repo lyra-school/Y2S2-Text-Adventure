@@ -79,6 +79,8 @@ namespace Y2S2_Text_Adventure
         {
             gridMenu.Visibility = Visibility.Collapsed;
             gridGame.Visibility = Visibility.Visible;
+
+            _game.ReadScenes();
         }
 
         /// <summary>

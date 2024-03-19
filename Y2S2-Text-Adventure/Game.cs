@@ -23,6 +23,8 @@ namespace Y2S2_Text_Adventure
     internal class Game
     {
         private HashSet<Scene> _scenes = new HashSet<Scene>();
+        private int health = 10;
+        private int will = 10;
         private Scene _currentScene;
         public Game() {
             

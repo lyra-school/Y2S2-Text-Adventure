@@ -11,7 +11,6 @@ namespace Y2S2_Text_Adventure
         NONE,
         STAT_CHANGE,
         ADVANCE,
-        STATUS
     }
 
     internal enum Statistic

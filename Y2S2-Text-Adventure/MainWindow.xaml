@@ -27,9 +27,9 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button x:Name="btnStart" Content="Start" Click="btnStart_Click"/>
+                <Button x:Name="btnLoad" Content="Load Game"/>
                 <Button x:Name="btnHow" Content="How to Play" Click="btnHow_Click"/>
                 <Button x:Name="btnAbout" Content="About" Click="btnAbout_Click"/>
-                <Button x:Name="btnVerify" Content="Verify Game Data"/>
             </StackPanel>
             <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

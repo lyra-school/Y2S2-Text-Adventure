@@ -126,5 +126,15 @@ namespace Y2S2_Text_Adventure
             tbxPrompt.FontStyle = FontStyles.Normal;
             tbxPrompt.Text = "";
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrompt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

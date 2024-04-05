@@ -66,10 +66,10 @@
                         <Setter Property="Padding" Value="5"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSave_Click"/>
                 <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click"/>
             </StackPanel>
-            <Button x:Name="btnPrompt" Content="Enter" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnPrompt" Content="Enter" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnPrompt_Click"/>
             <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click"/>
         </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">

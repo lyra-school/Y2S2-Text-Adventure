@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="gridParent">
-        <Grid x:Name="gridMenu">
+        <Grid x:Name="gridMenu" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -33,10 +33,11 @@
             </StackPanel>
             <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Grid x:Name="gridGame" Visibility="Collapsed">
+        <Grid x:Name="gridGame" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -44,7 +45,7 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2">
+            <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
                 <TextBlock x:Name="tblkGame" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
                     
                 </TextBlock>
@@ -52,14 +53,24 @@
             <Border Grid.Column="1" Grid.Row="2">
                 <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
             </Border>
-            <TextBlock x:Name="tblkStats" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
+            <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
             </TextBlock>
-            <TextBlock x:Name="tblkInventory" Grid.Column="2" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
+            <TextBlock x:Name="tblkInventory" Grid.Column="3" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
             </TextBlock>
-            <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click"/>
-            <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click"/>
+            <StackPanel Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0, 50, 0, 0"/>
+                        <Setter Property="Padding" Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click"/>
+            </StackPanel>
+            <Button x:Name="btnPrompt" Content="Enter" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click"/>
         </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">
             <Grid.ColumnDefinitions>

@@ -14,12 +14,6 @@ namespace Y2S2_Text_Adventure
         STATUS
     }
 
-    internal enum StatusEffect
-    {
-        POISON,
-        CRIPPLED
-    }
-
     internal enum Statistic
     {
         HEALTH,
@@ -52,10 +46,6 @@ namespace Y2S2_Text_Adventure
         public void AddInteraction(Command cmd, string desc, string sndItem, string target)
         {
             Interactions.Add(new AdvanceInteraction(cmd, desc, sndItem, target));
-        }
-        public void AddInteraction(Command cmd, string desc, string sndItem, StatusEffect status, double amount, double chance, int duration)
-        {
-            Interactions.Add(new StatusInteraction(cmd, desc, sndItem, status, amount, chance, duration));
         }
         public void AddInteraction(Command cmd, string desc, string sndItem, Statistic stat, double amount, double chance)
         {

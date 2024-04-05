@@ -15,10 +15,7 @@
     {
       "Action": "EAT",
       "Description": "You ate this object.",
-      "Consequence": "STATUS",
-      "Penalty": "POISON",
-      "PenaltyAmount": -1,
-      "PenaltyLength": 10
+      "Consequence": "NONE"
     },
     {
       "Action": "TAKE",

@@ -59,6 +59,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interaction.cs" />
+    <Compile Include="Savedata.cs" />
+    <Compile Include="SavedataItem.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="SceneData.cs" />
     <Page Include="MainWindow.xaml">

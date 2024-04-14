@@ -31,6 +31,7 @@ namespace Y2S2_Text_Adventure
         public ItemType Type { get; set; }
         public HashSet<Interaction> Interactions { get; set; }
 
+        private static Interaction _fallbackInteraction = new Interaction(Command.ATTACK, "0", "");
         public Item(string name, string desc, string insc, ItemType type)
         {
             Name = name;
@@ -49,6 +50,18 @@ namespace Y2S2_Text_Adventure
         public void AddInteraction(Command cmd, string desc, string sndItem, Statistic stat, double amount, double chance)
         {
             Interactions.Add(new StatInteraction(cmd, desc, sndItem, stat, amount, chance));
+        }
+
+        public Interaction ReturnInteraction(Command cmd)
+        {
+            foreach (Interaction interaction in Interactions)
+            {
+                if(interaction.AssociatedCommand == cmd)
+                {
+                    return interaction;
+                }
+            }
+            return _fallbackInteraction;
         }
     }
 }

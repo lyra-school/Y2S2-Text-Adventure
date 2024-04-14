@@ -23,8 +23,8 @@ namespace Y2S2_Text_Adventure
     internal class Game
     {
         private HashSet<Scene> _scenes = new HashSet<Scene>();
-        private int health = 10;
-        private int will = 10;
+        private int _health = 10;
+        private int _will = 10;
         private Scene _currentScene;
         public Game() {
             
@@ -144,7 +144,6 @@ namespace Y2S2_Text_Adventure
                     return;
             }
         }
-        /*
         public string CommandFeedback(string command)
         {
             string[] commandComponents = command.Split(' ');
@@ -154,11 +153,7 @@ namespace Y2S2_Text_Adventure
             {
                 return "Could not find command: " + commandComponents[0];
             }
-            switch(cmd)
-            {
-
-            }
+            
         }
-        */
     }
 }

@@ -22,5 +22,10 @@ namespace Y2S2_Text_Adventure
         {
             Items = new List<SavedataItem>();
         }
+
+        public override string ToString()
+        {
+            return $"{SavedataId} - {Name} - {DateCreated}";
+        }
     }
 }

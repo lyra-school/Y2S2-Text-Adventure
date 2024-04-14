@@ -21,6 +21,7 @@ namespace Y2S2_Text_Adventure
     public partial class MainWindow : Window
     {
         private Game _game = new Game();
+        private Saves db = new Saves();
         public MainWindow()
         {
             InitializeComponent();

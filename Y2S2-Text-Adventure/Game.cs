@@ -26,6 +26,7 @@ namespace Y2S2_Text_Adventure
         private int _health = 10;
         private int _will = 10;
         private Scene _currentScene;
+        private HashSet<Item> _inventory = new HashSet<Item>();
         public Game() {
             
         }
@@ -85,7 +86,7 @@ namespace Y2S2_Text_Adventure
                             throw new ArgumentException("Unrecognized item type: " + type);
                         }
                         Item it = new Item(name, desc, insc, ttype);
-                        sc.AddItem(it);
+                        sc.Items.Add(it);
                         List<JToken> results = item["Interactions"].Children().ToList();
                         foreach(JToken token in results)
                         {
@@ -153,7 +154,10 @@ namespace Y2S2_Text_Adventure
             {
                 return "Could not find command: " + commandComponents[0];
             }
-            
+            foreach(Item item in _currentScene.Items)
+            {
+
+            }
         }
     }
 }

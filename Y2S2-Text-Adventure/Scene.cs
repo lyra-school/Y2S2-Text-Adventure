@@ -34,7 +34,7 @@ namespace Y2S2_Text_Adventure
         public string Heading { get; set; }
         public string Description { get; set; }
         private List<SceneConnection> _connections = new List<SceneConnection>();
-        private HashSet<Item> _items = new HashSet<Item>();
+        public HashSet<Item> Items { get; set; }
 
         public Scene(string name, string heading, string description)
         {
@@ -51,14 +51,7 @@ namespace Y2S2_Text_Adventure
             }
             _connections.Add(new SceneConnection(sceneName, sceneDirection));
         }
-        public void AddItem(Item item)
-        {
-            _items.Add(item);
-        }
-        public void RemoveItem(Item item)
-        {
-            _items.Remove(item);
-        }
+
         public string GetConnectionName(Direction direction)
         {
             foreach(SceneConnection connection in _connections)

@@ -25,7 +25,7 @@ namespace Y2S2_Text_Adventure
         private HashSet<Scene> _scenes = new HashSet<Scene>();
         private int _health = 10;
         private int _will = 10;
-        private Scene _currentScene;
+        private Scene _currentScene = new Scene();
         private HashSet<Item> _inventory = new HashSet<Item>();
         public Game() {
             
@@ -43,6 +43,10 @@ namespace Y2S2_Text_Adventure
                 }
                 Scene sc = new Scene(deserializedScene.Name, deserializedScene.Heading, deserializedScene.Description);
                 _scenes.Add(sc);
+                if(sc.Name == "SceneExample")
+                {
+                    _currentScene = sc;
+                }
                 for(int i = 0; i < deserializedScene.NeighboringScenes.Length; i++)
                 {
                     Direction dir;
@@ -154,10 +158,33 @@ namespace Y2S2_Text_Adventure
             {
                 return "Could not find command: " + commandComponents[0];
             }
-            foreach(Item item in _currentScene.Items)
+            if(cmd == Command.LOOK && commandComponents.Length == 1)
             {
-
+                return _currentScene.Description;
             }
+            Item targetItem = new Item();
+            try
+            {
+                foreach (Item item in _currentScene.Items)
+                {
+                    if (item.Name == commandComponents[1])
+                    {
+                        targetItem = item;
+                    }
+                }
+                foreach(Item item in _inventory)
+                {
+                    if(item.Name == commandComponents[1])
+                    {
+                        targetItem = item;
+                    }
+                }
+            }
+            catch
+            {
+                return "Your command is missing an argument.";
+            }
+            
         }
     }
 }

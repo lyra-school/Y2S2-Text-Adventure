@@ -32,6 +32,11 @@ namespace Y2S2_Text_Adventure
         public HashSet<Interaction> Interactions { get; set; }
 
         private static Interaction _fallbackInteraction = new Interaction(Command.ATTACK, "0", "");
+
+        public Item()
+        {
+            Name = "None";
+        }
         public Item(string name, string desc, string insc, ItemType type)
         {
             Name = name;

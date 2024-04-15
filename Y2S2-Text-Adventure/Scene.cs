@@ -34,8 +34,12 @@ namespace Y2S2_Text_Adventure
         public string Heading { get; set; }
         public string Description { get; set; }
         private List<SceneConnection> _connections = new List<SceneConnection>();
-        public HashSet<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
 
+        public Scene()
+        {
+
+        }
         public Scene(string name, string heading, string description)
         {
             Name = name;
@@ -62,6 +66,11 @@ namespace Y2S2_Text_Adventure
                 }
             }
             return null;
+        }
+
+        public string ReturnDynamicDescription()
+        {
+
         }
     }
 }

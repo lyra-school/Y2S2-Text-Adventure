@@ -157,9 +157,8 @@ namespace Y2S2_Text_Adventure
                     return;
             }
         }
-        public string CommandFeedback(string command)
+        public string CommandFeedback(string[] commandComponents)
         {
-            string[] commandComponents = command.Split(' ');
             Command cmd;
             bool exists = Enum.TryParse(commandComponents[0].ToUpper(), out cmd);
             if(!exists)
@@ -246,7 +245,7 @@ namespace Y2S2_Text_Adventure
                     }
                 }
                 _currentScene = transition;
-                return "You are whisked away to " + nextScene + ".";
+                return intr.Description + "\n\nYou are whisked away to " + nextScene + ".";
             } else if(kindOfInteraction == typeof(StatInteraction))
             {
                 Statistic stat = intr.GetStatistic();
@@ -256,21 +255,30 @@ namespace Y2S2_Text_Adventure
                     _health += pointChange;
                     if(pointChange < 0)
                     {
-                        return $"You lost {Math.Abs(pointChange)} health.";
-                    } else
+                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.";
+                    }
+                    else if (pointChange == 0)
                     {
-                        return $"You gained {pointChange} health.";
+                        return $"{intr.Description}";
+                    }
+                    else
+                    {
+                        return $"{intr.Description}\n\nYou gained {pointChange} health.";
                     }
                 } else
                 {
                     _will += pointChange;
                     if (pointChange < 0)
                     {
-                        return $"You lost {Math.Abs(pointChange)} will.";
+                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.";
+                    }
+                    else if(pointChange == 0)
+                    {
+                        return $"{intr.Description}";
                     }
                     else
                     {
-                        return $"You gained {pointChange} will.";
+                        return $"{intr.Description}\n\nYou gained {pointChange} will.";
                     }
                 }
             } else

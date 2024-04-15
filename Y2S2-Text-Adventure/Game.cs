@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -90,7 +91,14 @@ namespace Y2S2_Text_Adventure
                             throw new ArgumentException("Unrecognized item type: " + type);
                         }
                         Item it = new Item(name, desc, insc, ttype);
-                        sc.Items.Add(it);
+                        if(it.Type == ItemType.INVENTORY)
+                        {
+                            sc.Items.Add(it);
+                        }
+                        else
+                        {
+                            sc.StaticItems.Add(it);
+                        }
                         List<JToken> results = item["Interactions"].Children().ToList();
                         foreach(JToken token in results)
                         {
@@ -131,13 +139,13 @@ namespace Y2S2_Text_Adventure
                     {
                         throw new ArgumentException("Unrecognized status effect:" + interaction["Penalty"].ToString());
                     }
-                    double amt2;
+                    int amt2;
                     string a2 = interaction["PenaltyAmount"].ToString();
                     if (String.IsNullOrEmpty(a2))
                     {
                         a2 = "0";
                     }
-                    amt2 = double.Parse(a2);
+                    amt2 = int.Parse(a2);
                     double chance2;
                     string b2 = interaction["PenaltyChance"].ToString();
                     if (String.IsNullOrEmpty(b2))
@@ -160,31 +168,145 @@ namespace Y2S2_Text_Adventure
             }
             if(cmd == Command.LOOK && commandComponents.Length == 1)
             {
-                return _currentScene.Description;
+                return "You take a look again.";
+            }
+            if(cmd == Command.GO)
+            {
+                if(commandComponents.Length < 2)
+                {
+                    return "Go where?";
+                }
+                Direction dir;
+                bool exists2 = Enum.TryParse(commandComponents[1].ToUpper(), out dir);
+                if (!exists2)
+                {
+                    return "Not a recognized direction: " + commandComponents[1];
+                }
+                string nextScene = _currentScene.GetConnectionName(dir);
+                if(String.IsNullOrEmpty(nextScene))
+                {
+                    return "You can't find a way out in that direction.";
+                } else
+                {
+                    Scene transition = new Scene();
+                    foreach(Scene scene in _scenes)
+                    {
+                        if(scene.Name == nextScene)
+                        {
+                            transition = scene;
+                        }
+                    }
+                    _currentScene = transition;
+                    return "You head over to " + nextScene + ".";
+                }
             }
             Item targetItem = new Item();
+            Item secondItem = new Item();
             try
             {
-                foreach (Item item in _currentScene.Items)
+                targetItem = ItemFinder(commandComponents[1]);
+                if(targetItem.Name == "None")
                 {
-                    if (item.Name == commandComponents[1])
-                    {
-                        targetItem = item;
-                    }
+                    return "Item not found: " + targetItem.Name + ".";
                 }
-                foreach(Item item in _inventory)
+                if(commandComponents.Length > 2)
                 {
-                    if(item.Name == commandComponents[1])
-                    {
-                        targetItem = item;
-                    }
+                    secondItem = ItemFinder(commandComponents[2]);
                 }
             }
             catch
             {
-                return "Your command is missing an argument.";
+                return "The command " + cmd.ToString() + " is missing a parameter.";
             }
-            
+            if (secondItem.Name != "None" && cmd == Command.LOOK)
+            {
+                return $"The {cmd} command cannot be used with more than one item.";                 
+            } else if (cmd == Command.LOOK)
+            {
+                return targetItem.Description;
+            }
+            Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);
+            if (intr.Description == "0")
+            {
+                return "Command does not exist for this item.";
+            } else if(intr.Description == "1")
+            {
+                return $"{targetItem} cannot be used with {secondItem}.";
+            }
+            Type kindOfInteraction = intr.GetType();
+            if (kindOfInteraction == typeof(AdvanceInteraction))
+            {
+                string nextScene = intr.GetTargetScene();
+                Scene transition = new Scene();
+                foreach (Scene scene in _scenes)
+                {
+                    if (scene.Name == nextScene)
+                    {
+                        transition = scene;
+                    }
+                }
+                _currentScene = transition;
+                return "You are whisked away to " + nextScene + ".";
+            } else if(kindOfInteraction == typeof(StatInteraction))
+            {
+                Statistic stat = intr.GetStatistic();
+                int pointChange = intr.GetPointPenalty();
+                if(stat == Statistic.HEALTH)
+                {
+                    _health += pointChange;
+                    if(pointChange < 0)
+                    {
+                        return $"You lost {Math.Abs(pointChange)} health.";
+                    } else
+                    {
+                        return $"You gained {pointChange} health.";
+                    }
+                } else
+                {
+                    _will += pointChange;
+                    if (pointChange < 0)
+                    {
+                        return $"You lost {Math.Abs(pointChange)} will.";
+                    }
+                    else
+                    {
+                        return $"You gained {pointChange} will.";
+                    }
+                }
+            } else
+            {
+                return intr.Description;
+            }
+        }
+
+        public Item ItemFinder(string target)
+        {
+            Item foundItem = new Item();
+            foreach (Item item in _currentScene.Items)
+            {
+                if (item.Name == target)
+                {
+                    foundItem = item;
+                }
+            }
+            foreach (Item item in _inventory)
+            {
+                if (item.Name == target)
+                {
+                    foundItem = item;
+                }
+            }
+            return foundItem;
+        }
+
+        public string ReturnHeading()
+        {
+            return _currentScene.Heading;
+        }
+
+        public string ReturnDescription()
+        {
+            return _currentScene.Description;
         }
     }
 }

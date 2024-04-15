@@ -31,7 +31,8 @@ namespace Y2S2_Text_Adventure
         public ItemType Type { get; set; }
         public HashSet<Interaction> Interactions { get; set; }
 
-        private static Interaction _fallbackInteraction = new Interaction(Command.ATTACK, "0", "");
+        private static Interaction _fallbackInteractionSingle = new Interaction(Command.ATTACK, "0", "");
+        private static Interaction _fallbackInteractionMultiple = new Interaction(Command.ATTACK, "1", "");
 
         public Item()
         {
@@ -52,21 +53,34 @@ namespace Y2S2_Text_Adventure
         {
             Interactions.Add(new AdvanceInteraction(cmd, desc, sndItem, target));
         }
-        public void AddInteraction(Command cmd, string desc, string sndItem, Statistic stat, double amount, double chance)
+        public void AddInteraction(Command cmd, string desc, string sndItem, Statistic stat, int amount, double chance)
         {
             Interactions.Add(new StatInteraction(cmd, desc, sndItem, stat, amount, chance));
         }
 
-        public Interaction ReturnInteraction(Command cmd)
+        public Interaction ReturnInteraction(Command cmd, Item secondItem)
         {
-            foreach (Interaction interaction in Interactions)
+            if(secondItem.Name != "None")
             {
-                if(interaction.AssociatedCommand == cmd)
+                foreach(Interaction interaction in Interactions)
                 {
-                    return interaction;
+                    if(interaction.AssociatedCommand == cmd && interaction.SecondItem == secondItem.Name)
+                    {
+                        return interaction;
+                    }
                 }
+                return _fallbackInteractionMultiple;
+            } else
+            {
+                foreach (Interaction interaction in Interactions)
+                {
+                    if (interaction.AssociatedCommand == cmd)
+                    {
+                        return interaction;
+                    }
+                }
+                return _fallbackInteractionSingle;
             }
-            return _fallbackInteraction;
         }
     }
 }

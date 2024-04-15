@@ -17,26 +17,61 @@ namespace Y2S2_Text_Adventure
             Description = description;
             SecondItem = secondItem;
         }
+        
+        public virtual string GetTargetScene()
+        {
+            return "";
+        }
+        public virtual Statistic GetStatistic()
+        {
+            return Statistic.HEALTH;
+        }
+        public virtual int GetPointPenalty()
+        {
+            return 0;
+        }
     }
     internal class AdvanceInteraction : Interaction
     {
-        public string TargetScene { get; set; }
+        private string _targetScene;
         public AdvanceInteraction(Command associatedCommand, string description, string secondItem, string targetScene) : base(associatedCommand, description, secondItem)
         {
-            TargetScene = targetScene;
+            _targetScene = targetScene;
+        }
+
+        public override string GetTargetScene()
+        {
+            return _targetScene;
         }
     }
     internal class StatInteraction : Interaction
     {
-        public Statistic StatisticAffected { get; set; }
-        public double Amount { get; set; }
-        public double Chance { get; set; }
+        private Statistic _statisticAffected;
+        private int _amount;
+        private double _chance;
 
-        public StatInteraction(Command associatedCommand, string description, string secondItem, Statistic statisticAffected, double amount, double chance) : base(associatedCommand, description, secondItem)
+        private static Random _rnd = new Random();
+
+        public StatInteraction(Command associatedCommand, string description, string secondItem, Statistic statisticAffected, int amount, double chance) : base(associatedCommand, description, secondItem)
         {
-            StatisticAffected = statisticAffected;
-            Amount = amount;
-            Chance = chance;
+            _statisticAffected = statisticAffected;
+            _amount = amount;
+            _chance = chance;
+        }
+
+        public override int GetPointPenalty()
+        {
+            double luck = _rnd.NextDouble();
+            if(luck <= _chance)
+            {
+                return _amount;
+            }
+            return 0;
+        }
+
+        public override Statistic GetStatistic()
+        {
+            return _statisticAffected;
         }
     }
 }

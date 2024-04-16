@@ -226,7 +226,7 @@ namespace Y2S2_Text_Adventure
             }
             else if (cmd == Command.LOOK)
             {
-                TextUpdater(targetItem.Description);
+                TextUpdater("\n\n" + targetItem.Description);
                 return;
             } else if(cmd == Command.TAKE)
             {

@@ -45,9 +45,8 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <TextBlock x:Name="tblkGame" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
-                    
+            <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
+                <TextBlock x:Name="tblkGame"  TextWrapping="Wrap">
                 </TextBlock>
             </ScrollViewer>
             <Border Grid.Column="1" Grid.Row="2">

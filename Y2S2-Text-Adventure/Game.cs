@@ -27,7 +27,7 @@ namespace Y2S2_Text_Adventure
         public int Health { get; set; }
         public int Will { get; set; }
         public Scene CurrentScene { get; set; }
-        private HashSet<Item> _inventory = new HashSet<Item>();
+        public HashSet<Item> Inventory { get; set; }
         public Game() {
             Health = 10;
             Will = 10;
@@ -159,21 +159,25 @@ namespace Y2S2_Text_Adventure
             }
         }
 
-        public Item ItemFinder(string target)
+        public Item ItemFinder(string target, out bool foundInInventory)
         {
+            foundInInventory = false;
             Item foundItem = new Item();
             foreach (Item item in CurrentScene.Items)
             {
                 if (item.Name == target)
                 {
                     foundItem = item;
+                    break;
                 }
             }
-            foreach (Item item in _inventory)
+            foreach (Item item in Inventory)
             {
                 if (item.Name == target)
                 {
                     foundItem = item;
+                    foundInInventory = true;
+                    break;
                 }
             }
             return foundItem;

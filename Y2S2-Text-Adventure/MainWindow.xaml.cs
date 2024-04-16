@@ -191,9 +191,11 @@ namespace Y2S2_Text_Adventure
             }
             Item targetItem = new Item();
             Item secondItem = new Item();
+            bool tItemInInv = false;
+            bool sItemInInv = false;
             try
             {
-                targetItem = _game.ItemFinder(commandComponents[1]);
+                targetItem = _game.ItemFinder(commandComponents[1], out tItemInInv);
                 if (targetItem.Name == "None")
                 {
                     TextUpdater("Item not found: " + targetItem.Name + ".");
@@ -201,7 +203,7 @@ namespace Y2S2_Text_Adventure
                 }
                 if (commandComponents.Length > 2)
                 {
-                    secondItem = _game.ItemFinder(commandComponents[2]);
+                    secondItem = _game.ItemFinder(commandComponents[2], out sItemInInv);
                     if (secondItem.Name == "None")
                     {
                         TextUpdater("Item not found: " + secondItem.Name + ".");
@@ -214,7 +216,7 @@ namespace Y2S2_Text_Adventure
                 TextUpdater("The command " + cmd.ToString() + " is missing a parameter.");
                 return;
             }
-            if (secondItem.Name != "None" && cmd == Command.LOOK)
+            if (secondItem.Name != "None" && (cmd == Command.LOOK || cmd == Command.TAKE))
             {
                 TextUpdater($"The {cmd} command cannot be used with more than one item.");
                 return;
@@ -223,6 +225,22 @@ namespace Y2S2_Text_Adventure
             {
                 TextUpdater(targetItem.Description);
                 return;
+            } else if(cmd == Command.TAKE)
+            {
+                if(targetItem.Type == ItemType.STATIC)
+                {
+                    TextUpdater("You can't pick up this item!");
+                    return;
+                }
+                if(tItemInInv)
+                {
+                    TextUpdater("This item is already in your inventory.");
+                    return;
+                } else
+                {
+                    _game.CurrentScene.Items.Remove(targetItem);
+                    _game.Inventory.Add(targetItem);
+                }
             }
             Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);
             if (intr.Description == "0")
@@ -305,12 +323,20 @@ namespace Y2S2_Text_Adventure
 
         private void TextUpdater(string feedback)
         {
-
+            Run text = new Run(feedback);
+            text.FontSize = 16;
+            tblkGame.Inlines.Add(text);
         }
 
         private void SceneTextUpdater()
         {
+            Run title = new Run(_game.CurrentScene.Heading);
+            title.FontSize = 30;
+            tblkGame.Inlines.Add(title);
 
+            Run textBody = new Run(_game.CurrentScene.ReturnDynamicDescription());
+            title.FontSize = 16;
+            tblkGame.Inlines.Add(textBody);
         }
     }
 }

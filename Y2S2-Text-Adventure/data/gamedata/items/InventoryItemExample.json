@@ -1,5 +1,5 @@
 {
-  "Name": "InvExample",
+  "Name": "invexample",
   "Description": "This description appears when used with LOOK.",
   "Type": "INVENTORY",
   "InSceneDescription": "This description is only used by INVENTORY objects and appears in a scene before being picked up.",

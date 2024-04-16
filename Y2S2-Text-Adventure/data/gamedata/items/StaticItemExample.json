@@ -1,5 +1,5 @@
 {
-  "Name": "StaticExample",
+  "Name": "staticexample",
   "Description": "This description appears when used with LOOK.",
   "Type": "STATIC",
   "InSceneDescription": "This description is not used in this type of object. Static objects should be part of the scene's descrption.",

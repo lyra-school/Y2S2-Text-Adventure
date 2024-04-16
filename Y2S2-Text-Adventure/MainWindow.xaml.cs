@@ -141,37 +141,39 @@ namespace Y2S2_Text_Adventure
             {
                 return;
             }
+            command = command.ToLower();
             string[] commandComponents = command.Split(' ');
             Command cmd;
             bool exists = Enum.TryParse(commandComponents[0].ToUpper(), out cmd);
             if (!exists)
             {
-                TextUpdater("Could not find command: " + commandComponents[0]);
+                TextUpdater("\n\nCould not find command: " + commandComponents[0]);
                 return;
             }
             if (cmd == Command.LOOK && commandComponents.Length == 1)
             {
-                TextUpdater("You take a look again.");
+                TextUpdater("\n\nYou take a look again.");
+                SceneTextUpdater();
                 return;
             }
             if (cmd == Command.GO)
             {
                 if (commandComponents.Length < 2)
                 {
-                    TextUpdater("Go where?");
+                    TextUpdater("\n\nGo where?");
                     return;
                 }
                 Direction dir;
                 bool exists2 = Enum.TryParse(commandComponents[1].ToUpper(), out dir);
                 if (!exists2)
                 {
-                    TextUpdater("Not a recognized direction: " + commandComponents[1]);
+                    TextUpdater("\n\nNot a recognized direction: " + commandComponents[1]);
                     return;
                 }
                 string nextScene = _game.CurrentScene.GetConnectionName(dir);
                 if (String.IsNullOrEmpty(nextScene))
                 {
-                    TextUpdater("You can't find a way out in that direction.");
+                    TextUpdater("\n\nYou can't find a way out in that direction.");
                     return;
                 }
                 else
@@ -185,7 +187,7 @@ namespace Y2S2_Text_Adventure
                         }
                     }
                     _game.CurrentScene = transition;
-                    TextUpdater("You head over to " + nextScene + ".");
+                    TextUpdater("\n\nYou head over to " + nextScene + ".");
                     SceneTextUpdater();
                     return;
                 }
@@ -199,7 +201,7 @@ namespace Y2S2_Text_Adventure
                 targetItem = _game.ItemFinder(commandComponents[1], out tItemInInv);
                 if (targetItem.Name == "None")
                 {
-                    TextUpdater("Item not found: " + targetItem.Name + ".");
+                    TextUpdater("\n\nItem not found: " + commandComponents[1] + ".");
                     return;
                 }
                 if (commandComponents.Length > 2)
@@ -207,19 +209,19 @@ namespace Y2S2_Text_Adventure
                     secondItem = _game.ItemFinder(commandComponents[2], out sItemInInv);
                     if (secondItem.Name == "None")
                     {
-                        TextUpdater("Item not found: " + secondItem.Name + ".");
+                        TextUpdater("\n\nItem not found: " + commandComponents[2] + ".");
                         return;
                     }
                 }
             }
             catch
             {
-                TextUpdater("The command " + cmd.ToString() + " is missing a parameter.");
+                TextUpdater("\n\nThe command " + cmd.ToString() + " is missing a parameter.");
                 return;
             }
             if (secondItem.Name != "None" && (cmd == Command.LOOK || cmd == Command.TAKE))
             {
-                TextUpdater($"The {cmd} command cannot be used with more than one item.");
+                TextUpdater($"\n\nThe {cmd} command cannot be used with more than one item.");
                 return;
             }
             else if (cmd == Command.LOOK)
@@ -230,12 +232,12 @@ namespace Y2S2_Text_Adventure
             {
                 if(targetItem.Type == ItemType.STATIC)
                 {
-                    TextUpdater("You can't pick up this item!");
+                    TextUpdater("\n\nYou can't pick up this item!");
                     return;
                 }
                 if(tItemInInv)
                 {
-                    TextUpdater("This item is already in your inventory.");
+                    TextUpdater("\n\nThis item is already in your inventory.");
                     return;
                 } else
                 {
@@ -246,12 +248,12 @@ namespace Y2S2_Text_Adventure
             Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);
             if (intr.Description == "0")
             {
-                TextUpdater("Command does not exist for this item.");
+                TextUpdater("\n\nCommand does not exist for this item.");
                 return;
             }
             else if (intr.Description == "1")
             {
-                TextUpdater($"{targetItem} cannot be used with {secondItem}.");
+                TextUpdater($"\n\n{targetItem} cannot be used with {secondItem}.");
                 return;
             }
             Type kindOfInteraction = intr.GetType();
@@ -267,7 +269,7 @@ namespace Y2S2_Text_Adventure
                     }
                 }
                 _game.CurrentScene = transition;
-                TextUpdater(intr.Description + "\n\nYou are whisked away to " + nextScene + ".");
+                TextUpdater("\n\n" + intr.Description + "\n\nYou are whisked away to " + nextScene + ".");
                 SceneTextUpdater();
                 return;
             }
@@ -280,17 +282,17 @@ namespace Y2S2_Text_Adventure
                     _game.Health += pointChange;
                     if (pointChange < 0)
                     {
-                        TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.");
+                        TextUpdater($"\n\n{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.");
                         return;
                     }
                     else if (pointChange == 0)
                     {
-                        TextUpdater($"{intr.Description}");
+                        TextUpdater($"\n\n{intr.Description}");
                         return;
                     }
                     else
                     {
-                        TextUpdater($"{intr.Description}\n\nYou gained {pointChange} health.");
+                        TextUpdater($"\n\n{intr.Description}\n\nYou gained {pointChange} health.");
                         return;
                     }
                 }
@@ -299,24 +301,24 @@ namespace Y2S2_Text_Adventure
                     _game.Will += pointChange;
                     if (pointChange < 0)
                     {
-                        TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.");
+                        TextUpdater($"\n\n{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.");
                         return;
                     }
                     else if (pointChange == 0)
                     {
-                        TextUpdater($"{intr.Description}");
+                        TextUpdater($"\n\n{intr.Description}");
                         return;
                     }
                     else
                     {
-                        TextUpdater($"{intr.Description}\n\nYou gained {pointChange} will.");
+                        TextUpdater($"\n\n{intr.Description}\n\nYou gained {pointChange} will.");
                         return;
                     }
                 }
             }
             else
             {
-                TextUpdater(intr.Description);
+                TextUpdater("\n\n" + intr.Description);
                 return;
             }
 
@@ -325,18 +327,18 @@ namespace Y2S2_Text_Adventure
         private void TextUpdater(string feedback)
         {
             Run text = new Run(feedback);
-            text.FontSize = 16;
+            text.FontSize = 12;
             tblkGame.Inlines.Add(text);
         }
 
         private void SceneTextUpdater()
         {
             Run title = new Run(_game.CurrentScene.Heading);
-            title.FontSize = 30;
+            title.FontSize = 24;
             tblkGame.Inlines.Add(title);
 
             Run textBody = new Run(_game.CurrentScene.ReturnDynamicDescription());
-            title.FontSize = 16;
+            textBody.FontSize = 12;
             tblkGame.Inlines.Add(textBody);
         }
     }

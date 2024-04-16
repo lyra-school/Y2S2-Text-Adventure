@@ -48,7 +48,7 @@ namespace Y2S2_Text_Adventure
                 }
                 Scene sc = new Scene(deserializedScene.Name, deserializedScene.Heading, deserializedScene.Description);
                 Scenes.Add(sc);
-                if(sc.Name == "SceneExample")
+                if(sc.Name == "sceneexample")
                 {
                     CurrentScene = sc;
                 }
@@ -82,7 +82,7 @@ namespace Y2S2_Text_Adventure
                 JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
                 for(int j = 0; j < itemKeys.Length; j++)
                 {
-                    if (item["Name"].Equals(itemKeys[j]))
+                    if (item["Name"].ToString().Equals(itemKeys[j]))
                     {
                         string name = item["Name"].ToString();
                         string desc = item["Description"].ToString();
@@ -131,10 +131,12 @@ namespace Y2S2_Text_Adventure
             switch(ef)
             {
                 case Effect.NONE:
-                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString());
+                    string snd = VerifySecondItem(interaction);
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd);
                     return;
                 case Effect.ADVANCE:
-                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), interaction["Penalty"].ToString());
+                    string snd2 = VerifySecondItem(interaction);
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd2, interaction["Penalty"].ToString());
                     return;
                 case Effect.STAT_CHANGE:
                     Statistic stat;
@@ -144,21 +146,41 @@ namespace Y2S2_Text_Adventure
                         throw new ArgumentException("Unrecognized status effect:" + interaction["Penalty"].ToString());
                     }
                     int amt2;
-                    string a2 = interaction["PenaltyAmount"].ToString();
-                    if (String.IsNullOrEmpty(a2))
+                    string a2;
+                    if(interaction["PenaltyAmount"] == null)
                     {
                         a2 = "0";
+                    } else
+                    {
+                        a2 = interaction["PenaltyAmount"].ToString();
                     }
                     amt2 = int.Parse(a2);
                     double chance2;
-                    string b2 = interaction["PenaltyChance"].ToString();
-                    if (String.IsNullOrEmpty(b2))
+                    string b2;
+                    if (interaction["PenaltyChance"] == null)
                     {
                         b2 = "1";
                     }
+                    else
+                    {
+                        b2 = interaction["PenaltyChance"].ToString();
+                    }
                     chance2 = double.Parse(b2);
-                    it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), stat, amt2, chance2);
+                    string snd3 = VerifySecondItem(interaction);
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd3, stat, amt2, chance2);
                     return;
+            }
+        }
+
+        private string VerifySecondItem(JToken jToken)
+        {
+            if (jToken["SecondTarget"] == null)
+            {
+                return "";
+            }
+            else
+            {
+                return jToken["SecondTarget"].ToString();
             }
         }
 

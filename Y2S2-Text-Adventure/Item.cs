@@ -45,6 +45,7 @@ namespace Y2S2_Text_Adventure
             Description = desc;
             InSceneDescription = insc;
             Type = type;
+            Interactions = new HashSet<Interaction>();
         }
         public void AddInteraction(Command cmd, string desc, string sndItem)
         {

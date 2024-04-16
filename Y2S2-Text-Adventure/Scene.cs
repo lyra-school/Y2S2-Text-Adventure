@@ -48,6 +48,8 @@ namespace Y2S2_Text_Adventure
             Name = name;
             Heading = heading;
             Description = description;
+            StaticItems = new HashSet<Item>();
+            Items = new List<Item>();
         }
 
         public void AddConnection(string sceneName, Direction sceneDirection)
@@ -76,10 +78,10 @@ namespace Y2S2_Text_Adventure
             StringBuilder sb = new StringBuilder();
             foreach (Item item in Items)
             {
-                sb.Append(item.Description);
+                sb.Append(item.InSceneDescription);
                 sb.Append(" ");
             }
-            return $"{Description} \n\n {sb}";
+            return $"\n\n{Description}\n\n{sb}";
         }
     }
 }

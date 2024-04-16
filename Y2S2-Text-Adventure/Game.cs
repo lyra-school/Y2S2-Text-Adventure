@@ -79,7 +79,7 @@ namespace Y2S2_Text_Adventure
             }
             for (int i = 0; i < jsons.Count; i++)
             {
-                JObject item = JObject.Parse(jsons[i]);
+                JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
                 for(int j = 0; j < itemKeys.Length; j++)
                 {
                     if (item["Name"].Equals(itemKeys[j]))

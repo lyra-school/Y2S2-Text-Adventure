@@ -333,7 +333,7 @@ namespace Y2S2_Text_Adventure
 
         private void SceneTextUpdater()
         {
-            Run title = new Run(_game.CurrentScene.Heading);
+            Run title = new Run("\n\n" + _game.CurrentScene.Heading);
             title.FontSize = 24;
             tblkGame.Inlines.Add(title);
 

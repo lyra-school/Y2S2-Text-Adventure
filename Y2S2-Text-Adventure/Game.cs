@@ -64,7 +64,6 @@ namespace Y2S2_Text_Adventure
                 }
                 ReadAppropriateItems(sc, deserializedScene.Items);
             }
-            SetFirstScene();
         }
         public void ReadAppropriateItems(Scene sc, string[] itemKeys)
         {
@@ -187,16 +186,5 @@ namespace Y2S2_Text_Adventure
             return foundItem;
         }
 
-        private void SetFirstScene()
-        {
-            foreach(Scene scene in Scenes)
-            {
-                if(scene.Name == "SceneExample")
-                {
-                    CurrentScene = scene;
-                    return;
-                }
-            }
-        }
     }
 }

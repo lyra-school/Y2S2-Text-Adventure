@@ -135,6 +135,178 @@ namespace Y2S2_Text_Adventure
 
         private void btnPrompt_Click(object sender, RoutedEventArgs e)
         {
+            string command = tbxPrompt.Text;
+            if(String.IsNullOrEmpty(command))
+            {
+                return;
+            }
+            string[] commandComponents = command.Split(' ');
+            Command cmd;
+            bool exists = Enum.TryParse(commandComponents[0].ToUpper(), out cmd);
+            if (!exists)
+            {
+                TextUpdater("Could not find command: " + commandComponents[0]);
+                return;
+            }
+            if (cmd == Command.LOOK && commandComponents.Length == 1)
+            {
+                TextUpdater("You take a look again.");
+                return;
+            }
+            if (cmd == Command.GO)
+            {
+                if (commandComponents.Length < 2)
+                {
+                    TextUpdater("Go where?");
+                    return;
+                }
+                Direction dir;
+                bool exists2 = Enum.TryParse(commandComponents[1].ToUpper(), out dir);
+                if (!exists2)
+                {
+                    TextUpdater("Not a recognized direction: " + commandComponents[1]);
+                    return;
+                }
+                string nextScene = _game.CurrentScene.GetConnectionName(dir);
+                if (String.IsNullOrEmpty(nextScene))
+                {
+                    TextUpdater("You can't find a way out in that direction.");
+                    return;
+                }
+                else
+                {
+                    Scene transition = new Scene();
+                    foreach (Scene scene in _game.Scenes)
+                    {
+                        if (scene.Name == nextScene)
+                        {
+                            transition = scene;
+                        }
+                    }
+                    _game.CurrentScene = transition;
+                    TextUpdater("You head over to " + nextScene + ".");
+                    SceneTextUpdater();
+                    return;
+                }
+            }
+            Item targetItem = new Item();
+            Item secondItem = new Item();
+            try
+            {
+                targetItem = _game.ItemFinder(commandComponents[1]);
+                if (targetItem.Name == "None")
+                {
+                    TextUpdater("Item not found: " + targetItem.Name + ".");
+                    return;
+                }
+                if (commandComponents.Length > 2)
+                {
+                    secondItem = _game.ItemFinder(commandComponents[2]);
+                    if (secondItem.Name == "None")
+                    {
+                        TextUpdater("Item not found: " + secondItem.Name + ".");
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+                TextUpdater("The command " + cmd.ToString() + " is missing a parameter.");
+                return;
+            }
+            if (secondItem.Name != "None" && cmd == Command.LOOK)
+            {
+                TextUpdater($"The {cmd} command cannot be used with more than one item.");
+                return;
+            }
+            else if (cmd == Command.LOOK)
+            {
+                TextUpdater(targetItem.Description);
+                return;
+            }
+            Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);
+            if (intr.Description == "0")
+            {
+                TextUpdater("Command does not exist for this item.");
+                return;
+            }
+            else if (intr.Description == "1")
+            {
+                TextUpdater($"{targetItem} cannot be used with {secondItem}.");
+                return;
+            }
+            Type kindOfInteraction = intr.GetType();
+            if (kindOfInteraction == typeof(AdvanceInteraction))
+            {
+                string nextScene = intr.GetTargetScene();
+                Scene transition = new Scene();
+                foreach (Scene scene in _game.Scenes)
+                {
+                    if (scene.Name == nextScene)
+                    {
+                        transition = scene;
+                    }
+                }
+                _game.CurrentScene = transition;
+                TextUpdater(intr.Description + "\n\nYou are whisked away to " + nextScene + ".");
+                SceneTextUpdater();
+                return;
+            }
+            else if (kindOfInteraction == typeof(StatInteraction))
+            {
+                Statistic stat = intr.GetStatistic();
+                int pointChange = intr.GetPointPenalty();
+                if (stat == Statistic.HEALTH)
+                {
+                    _health += pointChange;
+                    if (pointChange < 0)
+                    {
+                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.";
+                    }
+                    else if (pointChange == 0)
+                    {
+                        return $"{intr.Description}";
+                    }
+                    else
+                    {
+                        return $"{intr.Description}\n\nYou gained {pointChange} health.";
+                    }
+                }
+                else
+                {
+                    _will += pointChange;
+                    if (pointChange < 0)
+                    {
+                        TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.");
+                        return;
+                    }
+                    else if (pointChange == 0)
+                    {
+                        TextUpdater($"{intr.Description}");
+                        return;
+                    }
+                    else
+                    {
+                        TextUpdater($"{intr.Description}\n\nYou gained {pointChange} will.");
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                TextUpdater(intr.Description);
+                return;
+            }
+
+        }
+
+        private void TextUpdater(string feedback)
+        {
+
+        }
+
+        private void SceneTextUpdater()
+        {
 
         }
     }

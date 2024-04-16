@@ -23,10 +23,10 @@ namespace Y2S2_Text_Adventure
     }
     internal class Game
     {
-        private HashSet<Scene> _scenes = new HashSet<Scene>();
+        public HashSet<Scene> Scenes { get; set; }
         private int _health = 10;
         private int _will = 10;
-        private Scene _currentScene = new Scene();
+        public Scene CurrentScene { get; set; }
         private HashSet<Item> _inventory = new HashSet<Item>();
         public Game() {
             
@@ -43,10 +43,10 @@ namespace Y2S2_Text_Adventure
                     deserializedScene = JsonConvert.DeserializeObject<SceneData>(json);
                 }
                 Scene sc = new Scene(deserializedScene.Name, deserializedScene.Heading, deserializedScene.Description);
-                _scenes.Add(sc);
+                Scenes.Add(sc);
                 if(sc.Name == "SceneExample")
                 {
-                    _currentScene = sc;
+                    CurrentScene = sc;
                 }
                 for(int i = 0; i < deserializedScene.NeighboringScenes.Length; i++)
                 {
@@ -157,140 +157,15 @@ namespace Y2S2_Text_Adventure
                     return;
             }
         }
-        public string CommandFeedback(string[] commandComponents)
+        public void StatUpdater(Statistic stat, int amount)
         {
-            Command cmd;
-            bool exists = Enum.TryParse(commandComponents[0].ToUpper(), out cmd);
-            if(!exists)
-            {
-                return "Could not find command: " + commandComponents[0];
-            }
-            if(cmd == Command.LOOK && commandComponents.Length == 1)
-            {
-                return "You take a look again.";
-            }
-            if(cmd == Command.GO)
-            {
-                if(commandComponents.Length < 2)
-                {
-                    return "Go where?";
-                }
-                Direction dir;
-                bool exists2 = Enum.TryParse(commandComponents[1].ToUpper(), out dir);
-                if (!exists2)
-                {
-                    return "Not a recognized direction: " + commandComponents[1];
-                }
-                string nextScene = _currentScene.GetConnectionName(dir);
-                if(String.IsNullOrEmpty(nextScene))
-                {
-                    return "You can't find a way out in that direction.";
-                } else
-                {
-                    Scene transition = new Scene();
-                    foreach(Scene scene in _scenes)
-                    {
-                        if(scene.Name == nextScene)
-                        {
-                            transition = scene;
-                        }
-                    }
-                    _currentScene = transition;
-                    return "You head over to " + nextScene + ".";
-                }
-            }
-            Item targetItem = new Item();
-            Item secondItem = new Item();
-            try
-            {
-                targetItem = ItemFinder(commandComponents[1]);
-                if(targetItem.Name == "None")
-                {
-                    return "Item not found: " + targetItem.Name + ".";
-                }
-                if(commandComponents.Length > 2)
-                {
-                    secondItem = ItemFinder(commandComponents[2]);
-                }
-            }
-            catch
-            {
-                return "The command " + cmd.ToString() + " is missing a parameter.";
-            }
-            if (secondItem.Name != "None" && cmd == Command.LOOK)
-            {
-                return $"The {cmd} command cannot be used with more than one item.";                 
-            } else if (cmd == Command.LOOK)
-            {
-                return targetItem.Description;
-            }
-            Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);
-            if (intr.Description == "0")
-            {
-                return "Command does not exist for this item.";
-            } else if(intr.Description == "1")
-            {
-                return $"{targetItem} cannot be used with {secondItem}.";
-            }
-            Type kindOfInteraction = intr.GetType();
-            if (kindOfInteraction == typeof(AdvanceInteraction))
-            {
-                string nextScene = intr.GetTargetScene();
-                Scene transition = new Scene();
-                foreach (Scene scene in _scenes)
-                {
-                    if (scene.Name == nextScene)
-                    {
-                        transition = scene;
-                    }
-                }
-                _currentScene = transition;
-                return intr.Description + "\n\nYou are whisked away to " + nextScene + ".";
-            } else if(kindOfInteraction == typeof(StatInteraction))
-            {
-                Statistic stat = intr.GetStatistic();
-                int pointChange = intr.GetPointPenalty();
-                if(stat == Statistic.HEALTH)
-                {
-                    _health += pointChange;
-                    if(pointChange < 0)
-                    {
-                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.";
-                    }
-                    else if (pointChange == 0)
-                    {
-                        return $"{intr.Description}";
-                    }
-                    else
-                    {
-                        return $"{intr.Description}\n\nYou gained {pointChange} health.";
-                    }
-                } else
-                {
-                    _will += pointChange;
-                    if (pointChange < 0)
-                    {
-                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.";
-                    }
-                    else if(pointChange == 0)
-                    {
-                        return $"{intr.Description}";
-                    }
-                    else
-                    {
-                        return $"{intr.Description}\n\nYou gained {pointChange} will.";
-                    }
-                }
-            } else
-            {
-                return intr.Description;
-            }
+            if()
         }
 
         public Item ItemFinder(string target)
         {
             Item foundItem = new Item();
-            foreach (Item item in _currentScene.Items)
+            foreach (Item item in CurrentScene.Items)
             {
                 if (item.Name == target)
                 {
@@ -305,16 +180,6 @@ namespace Y2S2_Text_Adventure
                 }
             }
             return foundItem;
-        }
-
-        public string ReturnHeading()
-        {
-            return _currentScene.Heading;
-        }
-
-        public string ReturnDescription()
-        {
-            return _currentScene.Description;
         }
     }
 }

@@ -31,6 +31,9 @@ namespace Y2S2_Text_Adventure
         public Game() {
             Health = 10;
             Will = 10;
+            Scenes = new HashSet<Scene>();
+            Inventory = new HashSet<Item>();
+            CurrentScene = new Scene();
         }
 
         public void ReadScenes()

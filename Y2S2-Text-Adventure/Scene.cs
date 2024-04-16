@@ -40,6 +40,8 @@ namespace Y2S2_Text_Adventure
         public Scene()
         {
             Name = "None";
+            StaticItems = new HashSet<Item>();
+            Items = new List<Item>();
         }
         public Scene(string name, string heading, string description)
         {

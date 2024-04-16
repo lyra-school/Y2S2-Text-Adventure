@@ -37,6 +37,7 @@ namespace Y2S2_Text_Adventure
         public Item()
         {
             Name = "None";
+            Interactions = new HashSet<Interaction>();
         }
         public Item(string name, string desc, string insc, ItemType type)
         {

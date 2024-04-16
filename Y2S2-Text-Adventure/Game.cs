@@ -24,12 +24,13 @@ namespace Y2S2_Text_Adventure
     internal class Game
     {
         public HashSet<Scene> Scenes { get; set; }
-        private int _health = 10;
-        private int _will = 10;
+        public int Health { get; set; }
+        public int Will { get; set; }
         public Scene CurrentScene { get; set; }
         private HashSet<Item> _inventory = new HashSet<Item>();
         public Game() {
-            
+            Health = 10;
+            Will = 10;
         }
 
         public void ReadScenes()
@@ -156,10 +157,6 @@ namespace Y2S2_Text_Adventure
                     it.AddInteraction(act, interaction["Description"].ToString(), interaction["SecondTarget"].ToString(), stat, amt2, chance2);
                     return;
             }
-        }
-        public void StatUpdater(Statistic stat, int amount)
-        {
-            if()
         }
 
         public Item ItemFinder(string target)

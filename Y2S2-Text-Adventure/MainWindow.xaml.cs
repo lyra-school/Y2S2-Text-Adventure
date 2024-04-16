@@ -258,23 +258,26 @@ namespace Y2S2_Text_Adventure
                 int pointChange = intr.GetPointPenalty();
                 if (stat == Statistic.HEALTH)
                 {
-                    _health += pointChange;
+                    _game.Health += pointChange;
                     if (pointChange < 0)
                     {
-                        return $"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.";
+                        TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.");
+                        return;
                     }
                     else if (pointChange == 0)
                     {
-                        return $"{intr.Description}";
+                        TextUpdater($"{intr.Description}");
+                        return;
                     }
                     else
                     {
-                        return $"{intr.Description}\n\nYou gained {pointChange} health.";
+                        TextUpdater($"{intr.Description}\n\nYou gained {pointChange} health.");
+                        return;
                     }
                 }
                 else
                 {
-                    _will += pointChange;
+                    _game.Will += pointChange;
                     if (pointChange < 0)
                     {
                         TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.");

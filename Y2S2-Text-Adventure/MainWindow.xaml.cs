@@ -82,6 +82,7 @@ namespace Y2S2_Text_Adventure
             gridGame.Visibility = Visibility.Visible;
 
             _game.ReadScenes();
+            SceneTextUpdater();
         }
 
         /// <summary>

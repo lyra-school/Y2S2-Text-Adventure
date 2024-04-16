@@ -10,7 +10,7 @@ namespace Y2S2_Text_Adventure
     {
         NONE,
         STAT_CHANGE,
-        ADVANCE,
+        ADVANCE
     }
 
     internal enum Statistic

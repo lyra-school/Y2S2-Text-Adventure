@@ -84,5 +84,9 @@ namespace Y2S2_Text_Adventure
                 return _fallbackInteractionSingle;
             }
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

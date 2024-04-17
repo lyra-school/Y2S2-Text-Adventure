@@ -55,9 +55,18 @@
             <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
             </TextBlock>
-            <TextBlock x:Name="tblkInventory" Grid.Column="3" Grid.RowSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
-                <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
-            </TextBlock>
+            <Grid x:Name="gridInventory" Grid.Column="3" Grid.RowSpan="2" Margin="10" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="11*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="tblkInventory" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Padding="10" FontSize="16">
+                    <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
+                </TextBlock>
+                <ListBox x:Name="lbxInventory" Grid.Row="1" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderThickness="0">
+                    
+                </ListBox>
+            </Grid>
             <StackPanel Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">

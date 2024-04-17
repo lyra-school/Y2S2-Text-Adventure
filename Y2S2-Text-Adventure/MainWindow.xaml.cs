@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Y2S2_Text_Adventure
     {
         private Game _game = new Game();
         private Saves db = new Saves();
+        private ObservableCollection<Item> _observableInventory = new ObservableCollection<Item>();
         public MainWindow()
         {
             InitializeComponent();
@@ -83,6 +85,7 @@ namespace Y2S2_Text_Adventure
 
             _game.ReadScenes();
             SceneTextUpdater();
+            lbxInventory.ItemsSource = _observableInventory;
         }
 
         /// <summary>
@@ -108,12 +111,12 @@ namespace Y2S2_Text_Adventure
         /// <param name="e"></param>
         private void btnInventory_Click(object sender, RoutedEventArgs e)
         {
-            if(tblkInventory.Visibility == Visibility.Visible)
+            if(gridInventory.Visibility == Visibility.Visible)
             {
-                tblkInventory.Visibility = Visibility.Collapsed;
+                gridInventory.Visibility = Visibility.Collapsed;
             } else
             {
-                tblkInventory.Visibility = Visibility.Visible;
+                gridInventory.Visibility = Visibility.Visible;
             }
         }
 
@@ -243,6 +246,8 @@ namespace Y2S2_Text_Adventure
                 {
                     _game.CurrentScene.Items.Remove(targetItem);
                     _game.Inventory.Add(targetItem);
+                    _observableInventory = new ObservableCollection<Item>(_game.Inventory);
+                    lbxInventory.ItemsSource = _observableInventory;
                 }
             }
             Interaction intr = targetItem.ReturnInteraction(cmd, secondItem);

@@ -83,7 +83,14 @@ namespace Y2S2_Text_Adventure
             gridMenu.Visibility = Visibility.Collapsed;
             gridGame.Visibility = Visibility.Visible;
 
-            _game.ReadScenes();
+            try
+            {
+                _game.ReadScenes();
+            } catch(Exception ex)
+            {
+                throw new ArgumentException("Error loading files - improper formatting?");
+            }
+            
             SceneTextUpdater();
             lbxInventory.ItemsSource = _observableInventory;
         }

@@ -34,13 +34,11 @@ namespace Y2S2_Text_Adventure
         public string Heading { get; set; }
         public string Description { get; set; }
         private List<SceneConnection> _connections = new List<SceneConnection>();
-        public HashSet<Item> StaticItems { get; set; }
         public List<Item> Items { get; set; }
 
         public Scene()
         {
             Name = "None";
-            StaticItems = new HashSet<Item>();
             Items = new List<Item>();
         }
         public Scene(string name, string heading, string description)
@@ -48,7 +46,6 @@ namespace Y2S2_Text_Adventure
             Name = name;
             Heading = heading;
             Description = description;
-            StaticItems = new HashSet<Item>();
             Items = new List<Item>();
         }
 

@@ -95,14 +95,7 @@ namespace Y2S2_Text_Adventure
                             throw new ArgumentException("Unrecognized item type: " + type);
                         }
                         Item it = new Item(name, desc, insc, ttype);
-                        if(it.Type == ItemType.INVENTORY)
-                        {
-                            sc.Items.Add(it);
-                        }
-                        else
-                        {
-                            sc.StaticItems.Add(it);
-                        }
+                        sc.Items.Add(it);
                         List<JToken> results = item["Interactions"].Children().ToList();
                         foreach(JToken token in results)
                         {

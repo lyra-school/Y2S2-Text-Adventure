@@ -170,7 +170,7 @@ namespace Y2S2_Text_Adventure
             {
                 if (commandComponents.Length < 2)
                 {
-                    TextUpdater("\n\nGo where?");
+                    TextUpdater("Go where?");
                     return;
                 }
                 Direction dir;
@@ -211,7 +211,7 @@ namespace Y2S2_Text_Adventure
                 targetItem = _game.ItemFinder(commandComponents[1], out tItemInInv);
                 if (targetItem.Name == "None")
                 {
-                    TextUpdater("\n\nItem not found: " + commandComponents[1] + ".");
+                    TextUpdater("Item not found: " + commandComponents[1] + ".");
                     return;
                 }
                 if (commandComponents.Length > 2)

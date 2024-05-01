@@ -295,18 +295,17 @@ namespace Y2S2_Text_Adventure
                     if (pointChange < 0)
                     {
                         TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} health.");
-                        return;
                     }
                     else if (pointChange == 0)
                     {
                         TextUpdater($"{intr.Description}");
-                        return;
                     }
                     else
                     {
                         TextUpdater($"{intr.Description}\n\nYou gained {pointChange} health.");
-                        return;
                     }
+                    StatUpdateEvaluate(stat);
+                    return;
                 }
                 else
                 {
@@ -314,18 +313,17 @@ namespace Y2S2_Text_Adventure
                     if (pointChange < 0)
                     {
                         TextUpdater($"{intr.Description}\n\nYou lost {Math.Abs(pointChange)} will.");
-                        return;
                     }
                     else if (pointChange == 0)
                     {
                         TextUpdater($"{intr.Description}");
-                        return;
                     }
                     else
                     {
                         TextUpdater($"{intr.Description}\n\nYou gained {pointChange} will.");
-                        return;
                     }
+                    StatUpdateEvaluate(stat);
+                    return;
                 }
             }
             else
@@ -352,6 +350,37 @@ namespace Y2S2_Text_Adventure
             Run textBody = new Run(_game.CurrentScene.ReturnDynamicDescription());
             textBody.FontSize = 12;
             tblkGame.Inlines.Add(textBody);
+        }
+
+        private void StatUpdateEvaluate(Statistic statistic)
+        {
+            switch(statistic)
+            {
+                case Statistic.HEALTH:
+                    int currHealth = _game.Health;
+                    rnHealth.Text = "&#x0a;Health: " + currHealth;
+                    if(currHealth <= 0)
+                    {
+                        TextUpdater("You ran out of health! Game over.");
+                        DisableCmdline();
+                    }
+                    break;
+                default:
+                    int currWill = _game.Will;
+                    rnWill.Text = "&#x0a;Will: " + currWill;
+                    if(currWill <= 0)
+                    {
+                        TextUpdater("You no longer have the willpower to go on! Game over.");
+                        DisableCmdline();
+                    }
+                    break;
+            }
+        }
+
+        private void DisableCmdline()
+        {
+            tbxPrompt.IsEnabled = false;
+            btnPrompt.IsEnabled = false;
         }
     }
 }

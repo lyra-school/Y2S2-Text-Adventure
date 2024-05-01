@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="gridParent">
-        <Grid x:Name="gridMenu">
+        <Grid x:Name="gridMenu" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -33,7 +33,7 @@
             </StackPanel>
             <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Grid x:Name="gridGame" Visibility="Collapsed">
+        <Grid x:Name="gridGame">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
@@ -52,8 +52,10 @@
             <Border Grid.Column="1" Grid.Row="2">
                 <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
             </Border>
-            <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
+            <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16">
                 <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
+                <Run Name="rnHealth" Text="&#x0a;Health:" FontSize="18"/>
+                <Run Name="rnWill" Text="&#x0a;Will:" FontSize="18"/>
             </TextBlock>
             <Grid x:Name="gridInventory" Grid.Column="3" Grid.RowSpan="2" Margin="10" Visibility="Collapsed">
                 <Grid.RowDefinitions>

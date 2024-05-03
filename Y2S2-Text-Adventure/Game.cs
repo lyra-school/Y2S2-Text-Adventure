@@ -28,17 +28,32 @@ namespace Y2S2_Text_Adventure
         public int Will { get; set; }
         public Scene CurrentScene { get; set; }
         public HashSet<Item> Inventory { get; set; }
+        public HashSet<Item> NonExtant { get; set; }
+        public HashSet<Item> UsedItems { get; set; }
+
         public Game() {
             Health = 10;
             Will = 10;
             Scenes = new HashSet<Scene>();
             Inventory = new HashSet<Item>();
+            NonExtant = new HashSet<Item>();
+            UsedItems = new HashSet<Item>();
             CurrentScene = new Scene();
         }
 
         public void ReadScenes()
         {
             string[] paths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\scenes"));
+            string[] itemPaths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\items"));
+            List<string> jsons = new List<string>();
+            foreach (string path in itemPaths)
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    jsons.Add(json);
+                }
+            }
             foreach (string filename in paths) {
                 SceneData deserializedScene;
                 using (StreamReader r = new StreamReader(filename))
@@ -62,21 +77,12 @@ namespace Y2S2_Text_Adventure
                     }
                     sc.AddConnection(deserializedScene.NeighboringScenes[i], dir);
                 }
-                ReadAppropriateItems(sc, deserializedScene.Items);
+                ReadAppropriateItems(sc, jsons, deserializedScene.Items);
             }
+            ReadOutsideItems(jsons);
         }
-        public void ReadAppropriateItems(Scene sc, string[] itemKeys)
+        public void ReadAppropriateItems(Scene sc, List<string> jsons, string[] itemKeys)
         {
-            string[] paths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\items"));
-            List<string> jsons = new List<string>();
-            foreach(string path in paths)
-            {
-                using (StreamReader r = new StreamReader(path))
-                {
-                    string json = r.ReadToEnd();
-                    jsons.Add(json);
-                }
-            }
             for (int i = 0; i < jsons.Count; i++)
             {
                 JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
@@ -101,6 +107,33 @@ namespace Y2S2_Text_Adventure
                         {
                             LoadInteraction(it, token);
                         }
+                    }
+                }
+            }
+        }
+        public void ReadOutsideItems(List<string> jsons)
+        {
+            for(int i = 0; i < jsons.Count;i++)
+            {
+                JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
+                if (item["PartOfScene"].ToString().Equals("false"))
+                {
+                    string name = item["Name"].ToString();
+                    string desc = item["Description"].ToString();
+                    string type = item["Type"].ToString();
+                    string insc = item["InSceneDescription"].ToString();
+                    ItemType ttype;
+                    bool success = Enum.TryParse(type, out ttype);
+                    if (!success)
+                    {
+                        throw new ArgumentException("Unrecognized item type: " + type);
+                    }
+                    Item it = new Item(name, desc, insc, ttype);
+                    NonExtant.Add(it);
+                    List<JToken> results = item["Interactions"].Children().ToList();
+                    foreach (JToken token in results)
+                    {
+                        LoadInteraction(it, token);
                     }
                 }
             }

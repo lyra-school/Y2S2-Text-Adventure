@@ -10,7 +10,9 @@ namespace Y2S2_Text_Adventure
     {
         NONE,
         STAT_CHANGE,
-        ADVANCE
+        ADVANCE,
+        COMBINE,
+        FINAL
     }
 
     internal enum Statistic
@@ -31,8 +33,8 @@ namespace Y2S2_Text_Adventure
         public ItemType Type { get; set; }
         public HashSet<Interaction> Interactions { get; set; }
 
-        private static Interaction _fallbackInteractionSingle = new Interaction(Command.ATTACK, "0", "");
-        private static Interaction _fallbackInteractionMultiple = new Interaction(Command.ATTACK, "1", "");
+        private static Interaction _fallbackInteractionSingle = new GenericInteraction(Command.ATTACK, "0", "", Effect.NONE);
+        private static Interaction _fallbackInteractionMultiple = new GenericInteraction(Command.ATTACK, "1", "", Effect.NONE);
 
         public Item()
         {
@@ -47,9 +49,9 @@ namespace Y2S2_Text_Adventure
             Type = type;
             Interactions = new HashSet<Interaction>();
         }
-        public void AddInteraction(Command cmd, string desc, string sndItem)
+        public void AddInteraction(Command cmd, string desc, string sndItem, Effect effect)
         {
-            Interactions.Add(new Interaction(cmd, desc, sndItem));
+            Interactions.Add(new GenericInteraction(cmd, desc, sndItem, effect));
         }
         public void AddInteraction(Command cmd, string desc, string sndItem, string target)
         {
@@ -58,6 +60,10 @@ namespace Y2S2_Text_Adventure
         public void AddInteraction(Command cmd, string desc, string sndItem, Statistic stat, int amount, double chance)
         {
             Interactions.Add(new StatInteraction(cmd, desc, sndItem, stat, amount, chance));
+        }
+        public void AddInteraction(Command cmd, string desc, string sndItem, bool perish, string result)
+        {
+            Interactions.Add(new CombineInteraction(cmd, desc, sndItem, perish, result));
         }
 
         public Interaction ReturnInteraction(Command cmd, Item secondItem)

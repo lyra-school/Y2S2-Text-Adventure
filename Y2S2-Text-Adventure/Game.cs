@@ -124,8 +124,9 @@ namespace Y2S2_Text_Adventure
             switch(ef)
             {
                 case Effect.NONE:
+                case Effect.FINAL:
                     string snd = VerifySecondItem(interaction);
-                    it.AddInteraction(act, interaction["Description"].ToString(), snd);
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd, ef);
                     return;
                 case Effect.ADVANCE:
                     string snd2 = VerifySecondItem(interaction);
@@ -161,6 +162,16 @@ namespace Y2S2_Text_Adventure
                     chance2 = double.Parse(b2);
                     string snd3 = VerifySecondItem(interaction);
                     it.AddInteraction(act, interaction["Description"].ToString(), snd3, stat, amt2, chance2);
+                    return;
+                case Effect.COMBINE:
+                    bool perishStatus;
+                    bool success5 = Boolean.TryParse(interaction["Perishable"].ToString(), out perishStatus);
+                    if (!success5)
+                    {
+                        throw new ArgumentException("Item in a combination must be marked as either TRUE (deleted when combined) or FALSE in Perishable field.");
+                    }
+                    string snd4 = VerifySecondItem(interaction);
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd4, perishStatus, interaction["ResultingItem"].ToString());
                     return;
             }
         }

@@ -204,7 +204,8 @@ namespace Y2S2_Text_Adventure
                         throw new ArgumentException("Item in a combination must be marked as either TRUE (deleted when combined) or FALSE in Perishable field.");
                     }
                     string snd4 = VerifySecondItem(interaction);
-                    it.AddInteraction(act, interaction["Description"].ToString(), snd4, perishStatus, interaction["ResultingItem"].ToString());
+                    string res = interaction["ResultingItem"].ToString();
+                    it.AddInteraction(act, interaction["Description"].ToString(), snd4, perishStatus, res);
                     return;
             }
         }

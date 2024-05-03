@@ -24,7 +24,7 @@
       "SecondTarget": "invexample",
       "Consequence": "COMBINE",
       "Perishable": false,
-      "Result": "craftedexample"
+      "ResultingItem": "craftedexample"
     },
     {
       "Action": "TAKE",

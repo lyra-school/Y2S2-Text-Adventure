@@ -1,9 +1,9 @@
-{
-  "Name": "invexample",
-  "PartOfScene": true,
+﻿{
+  "Name": "craftedexample",
+  "PartOfScene": false,
   "Description": "This description appears when used with LOOK.",
   "Type": "INVENTORY",
-  "InSceneDescription": "This description is only used by INVENTORY objects and appears in a scene before being picked up.",
+  "InSceneDescription": "This field is never used for crafted items in the current version of the program, as crafted items are confined to the inventory.",
   "Interactions": [
     {
       "Action": "ATTACK",
@@ -16,15 +16,7 @@
     {
       "Action": "EAT",
       "Description": "You ate this object.",
-      "Consequence": "NONE"
-    },
-    {
-      "Action": "EAT",
-      "Description": "You ate this object.",
-      "SecondTarget": "staticexample",
-      "Consequence": "COMBINE",
-      "Perishable": false,
-      "Result": "craftedexample"
+      "Consequence": "FINAL"
     },
     {
       "Action": "TAKE",

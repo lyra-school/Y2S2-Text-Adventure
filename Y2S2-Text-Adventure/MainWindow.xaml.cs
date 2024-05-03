@@ -326,9 +326,58 @@ namespace Y2S2_Text_Adventure
                     return;
                 }
             }
+            else if(kindOfInteraction == typeof(CombineInteraction))
+            {
+                Interaction intr2 = secondItem.ReturnInteraction(cmd, targetItem);
+                if(intr2.Description == "1")
+                {
+                    TextUpdater("Combination interactions are improperly set up for this item; the second argument doesn't point back to its partner.");
+                    return;
+                }
+                if(intr.IsPerishable())
+                {
+                    if(tItemInInv)
+                    {
+                        _game.Inventory.Remove(targetItem);
+                        _game.UsedItems.Add(targetItem);
+                    } else
+                    {
+                        _game.CurrentScene.Items.Remove(targetItem);
+                        _game.UsedItems.Add(targetItem);
+                    }
+                }
+                if(intr2.IsPerishable())
+                {
+                    if (sItemInInv)
+                    {
+                        _game.Inventory.Remove(secondItem);
+                        _game.UsedItems.Add(secondItem);
+                    }
+                    else
+                    {
+                        _game.CurrentScene.Items.Remove(secondItem);
+                        _game.UsedItems.Add(secondItem);
+                    }
+                }
+                Item craft = new Item();
+                foreach(Item craftedItem in _game.Crafted)
+                {
+                    if(craftedItem.Name == intr.SecondItem)
+                    {
+                        craft = craftedItem;
+                        break;
+                    }
+                }
+                _game.Inventory.Add(craft);
+                TextUpdater($"{intr.Description}");
+            }
             else
             {
                 TextUpdater("" + intr.Description);
+                if (intr.GetEffect() == GameEffect.FINAL)
+                {
+                    DisableCmdline();
+                }
                 return;
             }
 

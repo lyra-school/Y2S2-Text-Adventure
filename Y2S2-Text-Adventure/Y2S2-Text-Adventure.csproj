@@ -113,6 +113,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <None Include="data\gamedata\items\InventoryItemExample.json" />
+    <None Include="data\gamedata\items\CraftedItemExample.json" />
     <None Include="data\gamedata\items\StaticItemExample.json" />
     <None Include="data\gamedata\scenes\SceneExample.json" />
     <None Include="data\gamedata\scenes\SceneExample2.json" />

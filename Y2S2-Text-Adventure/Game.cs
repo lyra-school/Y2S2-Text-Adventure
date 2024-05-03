@@ -28,7 +28,7 @@ namespace Y2S2_Text_Adventure
         public int Will { get; set; }
         public Scene CurrentScene { get; set; }
         public HashSet<Item> Inventory { get; set; }
-        public HashSet<Item> NonExtant { get; set; }
+        public HashSet<Item> Crafted { get; set; }
         public HashSet<Item> UsedItems { get; set; }
 
         public Game() {
@@ -36,7 +36,7 @@ namespace Y2S2_Text_Adventure
             Will = 10;
             Scenes = new HashSet<Scene>();
             Inventory = new HashSet<Item>();
-            NonExtant = new HashSet<Item>();
+            Crafted = new HashSet<Item>();
             UsedItems = new HashSet<Item>();
             CurrentScene = new Scene();
         }
@@ -116,7 +116,7 @@ namespace Y2S2_Text_Adventure
             for(int i = 0; i < jsons.Count;i++)
             {
                 JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
-                if (item["PartOfScene"].ToString().Equals("false"))
+                if (item["PartOfScene"].Equals(false))
                 {
                     string name = item["Name"].ToString();
                     string desc = item["Description"].ToString();
@@ -129,7 +129,7 @@ namespace Y2S2_Text_Adventure
                         throw new ArgumentException("Unrecognized item type: " + type);
                     }
                     Item it = new Item(name, desc, insc, ttype);
-                    NonExtant.Add(it);
+                    Crafted.Add(it);
                     List<JToken> results = item["Interactions"].Children().ToList();
                     foreach (JToken token in results)
                     {
@@ -141,7 +141,7 @@ namespace Y2S2_Text_Adventure
         public void LoadInteraction(Item it, JToken interaction)
         {
             string cons = interaction["Consequence"].ToString();
-            Effect ef;
+            GameEffect ef;
             bool success = Enum.TryParse(cons, out ef);
             if(!success)
             {
@@ -156,16 +156,16 @@ namespace Y2S2_Text_Adventure
             }
             switch(ef)
             {
-                case Effect.NONE:
-                case Effect.FINAL:
+                case GameEffect.NONE:
+                case GameEffect.FINAL:
                     string snd = VerifySecondItem(interaction);
                     it.AddInteraction(act, interaction["Description"].ToString(), snd, ef);
                     return;
-                case Effect.ADVANCE:
+                case GameEffect.ADVANCE:
                     string snd2 = VerifySecondItem(interaction);
                     it.AddInteraction(act, interaction["Description"].ToString(), snd2, interaction["Penalty"].ToString());
                     return;
-                case Effect.STAT_CHANGE:
+                case GameEffect.STAT_CHANGE:
                     Statistic stat;
                     bool success4 = Enum.TryParse(interaction["Penalty"].ToString(), out stat);
                     if (!success4)
@@ -196,7 +196,7 @@ namespace Y2S2_Text_Adventure
                     string snd3 = VerifySecondItem(interaction);
                     it.AddInteraction(act, interaction["Description"].ToString(), snd3, stat, amt2, chance2);
                     return;
-                case Effect.COMBINE:
+                case GameEffect.COMBINE:
                     bool perishStatus;
                     bool success5 = Boolean.TryParse(interaction["Perishable"].ToString(), out perishStatus);
                     if (!success5)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Y2S2_Text_Adventure
 {
-    internal enum Effect
+    internal enum GameEffect
     {
         NONE,
         STAT_CHANGE,
@@ -33,8 +33,8 @@ namespace Y2S2_Text_Adventure
         public ItemType Type { get; set; }
         public HashSet<Interaction> Interactions { get; set; }
 
-        private static Interaction _fallbackInteractionSingle = new GenericInteraction(Command.ATTACK, "0", "", Effect.NONE);
-        private static Interaction _fallbackInteractionMultiple = new GenericInteraction(Command.ATTACK, "1", "", Effect.NONE);
+        private static Interaction _fallbackInteractionSingle = new GenericInteraction(Command.ATTACK, "0", "", GameEffect.NONE);
+        private static Interaction _fallbackInteractionMultiple = new GenericInteraction(Command.ATTACK, "1", "", GameEffect.NONE);
 
         public Item()
         {
@@ -49,7 +49,7 @@ namespace Y2S2_Text_Adventure
             Type = type;
             Interactions = new HashSet<Interaction>();
         }
-        public void AddInteraction(Command cmd, string desc, string sndItem, Effect effect)
+        public void AddInteraction(Command cmd, string desc, string sndItem, GameEffect effect)
         {
             Interactions.Add(new GenericInteraction(cmd, desc, sndItem, effect));
         }

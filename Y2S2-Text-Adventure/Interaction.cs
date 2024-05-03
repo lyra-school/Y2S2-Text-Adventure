@@ -30,9 +30,9 @@ namespace Y2S2_Text_Adventure
         {
             return 0;
         }
-        public virtual Effect GetEffect()
+        public virtual GameEffect GetEffect()
         {
-            return Effect.NONE;
+            return GameEffect.NONE;
         }
         public virtual bool IsPerishable()
         {
@@ -45,12 +45,12 @@ namespace Y2S2_Text_Adventure
     }
     internal class GenericInteraction : Interaction
     {
-        private Effect _associatedEffect;
-        public GenericInteraction(Command associatedCommand, string description, string secondItem, Effect effect) : base(associatedCommand, description, secondItem)
+        private GameEffect _associatedEffect;
+        public GenericInteraction(Command associatedCommand, string description, string secondItem, GameEffect effect) : base(associatedCommand, description, secondItem)
         {
             _associatedEffect = effect;
         }
-        public override Effect GetEffect()
+        public override GameEffect GetEffect()
         {
             return _associatedEffect;
         }

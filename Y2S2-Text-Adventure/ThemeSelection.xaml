@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Y2S2_Text_Adventure"
         mc:Ignorable="d"
-        Title="ThemeSelection" Height="450" Width="800">
+        Title="ThemeSelection" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         
     </Grid>

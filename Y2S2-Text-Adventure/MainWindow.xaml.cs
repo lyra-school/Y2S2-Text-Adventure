@@ -431,5 +431,11 @@ namespace Y2S2_Text_Adventure
             tbxPrompt.IsEnabled = false;
             btnPrompt.IsEnabled = false;
         }
+
+        private void btnTheme_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeSelection themeWindow = new ThemeSelection();
+            themeWindow.ShowDialog();
+        }
     }
 }

@@ -5,9 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Y2S2_Text_Adventure"
         mc:Ignorable="d"
-        Title="ThemeSelection" Height="450" Width="800"
+        Title="ThemeSelection" Height="350" Width="200"
         WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BackgroundTheme" Color="#2d2d2d"/>
+        <SolidColorBrush x:Key="FontTheme" Color="#ffffff"/>
+        <SolidColorBrush x:Key="BorderTheme" Color="#ffffff"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Select Theme" FontFamily="{StaticResource ThornValley}" FontSize="20"/>
+        <ListBox x:Name="lbxThemes" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="3"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBoxItem x:Name="theme1" Content="Default" Background="#2d2d2d" Foreground="#ffffff"/>
+            <ListBoxItem x:Name="theme2" Content="High Contrast 1" Background="#fffb7a" Foreground="#16787b"/>
+            <ListBoxItem x:Name="theme3" Content="High Contrast 2" Background="#ff00ee" Foreground="#ffffff"/>
+            <ListBoxItem x:Name="theme4" Content="High Contrast 3" Background="#004104" Foreground="#ffd24c"/>
+            <ListBoxItem x:Name="theme5" Content="Scroll" Background="#ffd49b" Foreground="#2d2d2d"/>
+            <ListBoxItem x:Name="theme6" Content="Whimsy" Background="#7f3a5c" Foreground="#9b9bff"/>
+        </ListBox>
+        <Button x:Name="btnReturnTheme" Content="Return" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnReturnTheme_Click"/>
+        <Button x:Name="btnAcceptTheme" Content="Apply" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnAcceptTheme_Click"/>
     </Grid>
 </Window>

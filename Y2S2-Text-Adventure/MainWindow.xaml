@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:Y2S2_Text_Adventure"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BackgroundTheme" Color="#2d2d2d"/>
+        <SolidColorBrush x:Key="FontTheme" Color="#ffffff"/>
+        <SolidColorBrush x:Key="BorderTheme" Color="#ffffff"/>
+    </Window.Resources>
     <Grid x:Name="gridParent">
         <Grid x:Name="gridMenu">
             <Grid.ColumnDefinitions>
@@ -31,7 +36,7 @@
                 <Button x:Name="btnHow" Content="How to Play" Click="btnHow_Click"/>
                 <Button x:Name="btnAbout" Content="About" Click="btnAbout_Click"/>
             </StackPanel>
-            <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnTheme_Click"/>
         </Grid>
         <Grid x:Name="gridGame" Visibility="Collapsed">
             <Grid.ColumnDefinitions>

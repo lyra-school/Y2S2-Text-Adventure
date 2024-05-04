@@ -5,7 +5,5 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <FontFamily x:Key="ThornValley">./data/fonts/Thorn_Valley.ttf#Thorn Valley</FontFamily>
-        <SolidColorBrush x:Key="BackgroundTheme" Color="#2d2d2d"/>
-        <SolidColorBrush x:Key="FontTheme" Color="#ffffff"/>
     </Application.Resources>
 </Application>

@@ -116,7 +116,7 @@ namespace Y2S2_Text_Adventure
             for(int i = 0; i < jsons.Count;i++)
             {
                 JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
-                if (item["PartOfScene"].Equals(false))
+                if (!(bool)item["PartOfScene"])
                 {
                     string name = item["Name"].ToString();
                     string desc = item["Description"].ToString();

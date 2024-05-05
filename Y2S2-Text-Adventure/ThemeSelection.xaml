@@ -25,7 +25,8 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Select Theme" FontFamily="{StaticResource ThornValley}" FontSize="20"/>
+        <Image Source="/data/images/smallbg.png" Grid.ColumnSpan="4" Grid.RowSpan="4" Stretch="UniformToFill"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Select Theme" FontFamily="{StaticResource ThornValley}" Foreground="{StaticResource FontTheme}" FontSize="20"/>
         <ListBox x:Name="lbxThemes" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -41,7 +42,7 @@
             <ListBoxItem x:Name="theme5" Content="Scroll" Background="#ffd49b" Foreground="#2d2d2d"/>
             <ListBoxItem x:Name="theme6" Content="Whimsy" Background="#7f3a5c" Foreground="#9b9bff"/>
         </ListBox>
-        <Button x:Name="btnReturnTheme" Content="Return" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnReturnTheme_Click"/>
-        <Button x:Name="btnAcceptTheme" Content="Apply" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnAcceptTheme_Click"/>
+        <Button x:Name="btnReturnTheme" Content="Return" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnReturnTheme_Click" Padding="5"/>
+        <Button x:Name="btnAcceptTheme" Content="Apply" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Click="btnAcceptTheme_Click" Padding="5"/>
     </Grid>
 </Window>

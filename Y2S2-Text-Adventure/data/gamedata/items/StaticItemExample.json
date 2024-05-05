@@ -20,7 +20,7 @@
     },
     {
       "Action": "EAT",
-      "Description": "You ate this object.",
+      "Description": "You combined these objects.",
       "SecondTarget": "invexample",
       "Consequence": "COMBINE",
       "Perishable": false,

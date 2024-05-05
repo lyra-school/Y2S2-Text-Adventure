@@ -12,6 +12,7 @@
         <SolidColorBrush x:Key="BorderTheme" Color="#ffffff"/>
     </Window.Resources>
     <Grid x:Name="gridParent">
+        <Image Source="/data/images/mainbg.png" Stretch="UniformToFill"/>
         <Grid x:Name="gridMenu">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -24,11 +25,16 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" Foreground="{StaticResource FontTheme}" Text="Title" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="72" FontFamily="{StaticResource ThornValley}" Padding="20"/>
             <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Margin" Value="8"/>
                         <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Background" Value="{StaticResource BackgroundTheme}"/>
+                        <Setter Property="Foreground" Value="{StaticResource FontTheme}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource BorderTheme}"/>
+                        <Setter Property="BorderThickness" Value="2"/>
                     </Style>
                 </StackPanel.Resources>
                 <Button x:Name="btnStart" Content="Start" Click="btnStart_Click"/>
@@ -36,7 +42,7 @@
                 <Button x:Name="btnHow" Content="How to Play" Click="btnHow_Click"/>
                 <Button x:Name="btnAbout" Content="About" Click="btnAbout_Click"/>
             </StackPanel>
-            <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnTheme_Click"/>
+            <Button x:Name="btnTheme" Content="Change Theme" Padding="5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnTheme_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
         </Grid>
         <Grid x:Name="gridGame" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -55,7 +61,7 @@
                 </TextBlock>
             </ScrollViewer>
             <Border Grid.Column="1" Grid.Row="2">
-                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
+                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
             </Border>
             <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
                 <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
@@ -74,18 +80,18 @@
                     
                 </ListBox>
             </Grid>
-            <StackPanel Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="0, 50, 0, 0"/>
-                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="0, 40, 0, 0"/>
+                        <Setter Property="Padding" Value="10"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSave_Click"/>
-                <Button x:Name="btnStats" Content="Stats Button (Placeholder)" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click"/>
+                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSave_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
+                <Button x:Name="btnStats" Content="Stats" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
             </StackPanel>
-            <Button x:Name="btnPrompt" Content="Enter" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnPrompt_Click"/>
-            <Button x:Name="btnInventory" Content="Inventory Button (Placeholder)" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click"/>
+            <Button x:Name="btnPrompt" Content="Send" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnPrompt_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
+            <Button x:Name="btnInventory" Content="Inventory" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
         </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -100,28 +106,28 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="How to Play" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="42" FontFamily="{StaticResource ThornValley}" Padding="5"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" FontSize="11" TextWrapping="Wrap">
-                <TextBlock.Inlines>
-                    <Run Text="This is a parser-based text adventure game. In order to take actions, you must type"/>
-                    <Run FontWeight="Bold" Text="commands"/>
-                    <Run Text="into the prompt at the bottom of the screen."/>
-                    <Run Text="&#x0a;&#x0a;Most commands need a target appended to them. For"/>
-                    <Run FontWeight="Bold" Text="GO,"/>
-                    <Run Text="you must supply a cardinal direction. Send"/>
-                    <Run FontWeight="Bold" Text="LOOK"/>
-                    <Run Text="without a target to examine the scene again. For the rest, the target is an object or character you want to interact with. You can append"/>
-                    <Run FontWeight="Bold" Text="WITH [item]"/>
-                    <Run Text="to some commands to use a specific item."/>
-                    <Run FontWeight="Bold" Text="USE"/>
-                    <Run Text="is a generic command for situations where none other apply."/>
-                    <Run Text="&#x0a;&#x0a;All available commands are on the right. At this time, the program doesn't support chaining commands in one send, e.g. 'go west AND take hammer', rather, each command must be sent separately."/>
-                    <Run Text="&#x0a;&#x0a;On the game screen, buttons on the left and right are used to toggle the statistics menu and inventory, respectively."/>
-                    <Run Text="&#x0a;&#x0a;In certain situations, the prompt turns into a list of dialogue choices! In that case, you must click on one to proceed."/>
-                </TextBlock.Inlines>
-            </TextBlock>
-            <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-                <TextBlock Padding="5" FontSize="16" TextWrapping="Wrap">
+            <TextBlock Text="How to Play" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="42" FontFamily="{StaticResource ThornValley}" Foreground="{StaticResource FontTheme}" Padding="5"/>
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2">
+                <TextBlock Grid.Column="1" Grid.Row="1" FontSize="11" TextWrapping="Wrap" Foreground="{StaticResource FontTheme}" Background="{StaticResource BackgroundTheme}" Padding="5">
+                    <TextBlock.Inlines>
+                        <Run Text="This is a parser-based text adventure game. In order to take actions, you must type"/>
+                        <Run FontWeight="Bold" Text="commands"/>
+                        <Run Text="into the prompt at the bottom of the screen."/>
+                        <Run Text="&#x0a;&#x0a;Most commands need a target appended to them. For"/>
+                        <Run FontWeight="Bold" Text="GO,"/>
+                        <Run Text="you must supply a cardinal direction. Send"/>
+                        <Run FontWeight="Bold" Text="LOOK"/>
+                        <Run Text="without a target to examine the scene again. For the rest, the target is an object or character you want to interact with. You can append another item"/>
+                        <Run Text="to some commands for multi-item interactions."/>
+                        <Run FontWeight="Bold" Text="USE"/>
+                        <Run Text="is a generic command for situations where none other apply."/>
+                        <Run Text="&#x0a;&#x0a;All available commands are on the right. At this time, the program doesn't support chaining commands in one send, e.g. 'go west AND take hammer', rather, each command must be sent separately."/>
+                        <Run Text="&#x0a;&#x0a;On the game screen, buttons on the left and right are used to toggle the statistics menu and inventory, respectively."/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Border>
+            <Border Grid.Column="3" Grid.Row="1" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2">
+                <TextBlock Padding="5" FontSize="16" TextWrapping="Wrap" Foreground="{StaticResource FontTheme}" Background="{StaticResource BackgroundTheme}">
                     <TextBlock.Inlines>
                         <Run Text="- ATTACK"/>
                         <Run Text="&#x0a;- EAT"/>
@@ -133,7 +139,7 @@
                     </TextBlock.Inlines>
                 </TextBlock>
             </Border>
-            <Button x:Name="btnReturnHow" Content="Return" Padding="5" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnReturnHow_Click"/>
+            <Button x:Name="btnReturnHow" Content="Return" Padding="5" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnReturnHow_Click" Foreground="{StaticResource FontTheme}" Background="{StaticResource BackgroundTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
         </Grid>
         <Grid x:Name="gridAbout" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -146,16 +152,19 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="About" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="42" FontFamily="{StaticResource ThornValley}"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" FontSize="18" TextWrapping="Wrap">
-                <TextBlock.Inlines>
-                    <Run Text="This is an end-of-year school project done for the Object Oriented Development class."/>
-                    <Run FontWeight="Bold" Text="&#x0a;&#x0a;Credits:"/>
-                    <Run Text="&#x0a;&#x0a;Development and Writing: S00233718"/>
-                    <Run Text="&#x0a;&#x0a;Custom Font: RavenEXP @ 1001fonts.com"/>
-                </TextBlock.Inlines>
-            </TextBlock>
-            <Button x:Name="btnReturnAbout" Content="Return" Padding="5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnReturnAbout_Click"/>
+            <TextBlock Text="About" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="42" FontFamily="{StaticResource ThornValley}" Foreground="{StaticResource FontTheme}"/>
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2">
+                <TextBlock Grid.Column="1" Grid.Row="1" FontSize="18" TextWrapping="Wrap" Foreground="{StaticResource FontTheme}" Background="{StaticResource BackgroundTheme}" Padding="5">
+                    <TextBlock.Inlines>
+                        <Run Text="This is an end-of-year school project done for the Object Oriented Development class."/>
+                        <Run FontWeight="Bold" Text="&#x0a;&#x0a;Credits:"/>
+                        <Run Text="&#x0a;&#x0a;Development: S00233718"/>
+                        <Run Text="&#x0a;&#x0a;Writing: An anonymous friend"/>
+                        <Run Text="&#x0a;&#x0a;Custom Font: RavenEXP @ 1001fonts.com"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Border>
+            <Button x:Name="btnReturnAbout" Content="Return" Padding="5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnReturnAbout_Click" Foreground="{StaticResource FontTheme}" Background="{StaticResource BackgroundTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
         </Grid>
     </Grid>
 </Window>

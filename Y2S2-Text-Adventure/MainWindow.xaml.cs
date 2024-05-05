@@ -22,7 +22,7 @@ namespace Y2S2_Text_Adventure
     public partial class MainWindow : Window
     {
         private Game _game = new Game();
-        private Saves db = new Saves();
+        private Saves _db = new Saves();
         private ObservableCollection<Item> _observableInventory = new ObservableCollection<Item>();
         public MainWindow()
         {
@@ -362,13 +362,19 @@ namespace Y2S2_Text_Adventure
                 Item craft = new Item();
                 foreach(Item craftedItem in _game.Crafted)
                 {
-                    if(craftedItem.Name == intr.SecondItem)
+                    if(craftedItem.Name == intr.GetResultingItem())
                     {
                         craft = craftedItem;
                         break;
                     }
                 }
+                if(craft.Name == "None")
+                {
+                    TextUpdater("Crafted item not found. This is an error.");
+                }
                 _game.Inventory.Add(craft);
+                _observableInventory = new ObservableCollection<Item>(_game.Inventory);
+                lbxInventory.ItemsSource = _observableInventory;
                 TextUpdater($"{intr.Description}");
             }
             else

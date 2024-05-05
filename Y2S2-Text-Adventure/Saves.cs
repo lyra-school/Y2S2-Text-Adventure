@@ -13,7 +13,7 @@ namespace Y2S2_Text_Adventure
         {
        
         }
-        public Saves() : base("name=TextAdventureSaves")
+        public Saves() : base("TextAdventureSaves")
         {
 
         }

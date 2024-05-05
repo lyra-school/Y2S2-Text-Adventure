@@ -93,6 +93,9 @@
             <Button x:Name="btnPrompt" Content="Send" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnPrompt_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
             <Button x:Name="btnInventory" Content="Inventory" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
         </Grid>
+        <Grid x:Name="gridLoad" Visibility="Collapsed">
+            
+        </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

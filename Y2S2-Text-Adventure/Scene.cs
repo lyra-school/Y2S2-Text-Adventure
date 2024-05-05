@@ -75,8 +75,11 @@ namespace Y2S2_Text_Adventure
             StringBuilder sb = new StringBuilder();
             foreach (Item item in Items)
             {
-                sb.Append(item.InSceneDescription);
-                sb.Append(" ");
+                if(item.Type == ItemType.INVENTORY)
+                {
+                    sb.Append(item.InSceneDescription);
+                    sb.Append(" ");
+                }
             }
             return $"\n\n{Description}\n\n{sb}";
         }

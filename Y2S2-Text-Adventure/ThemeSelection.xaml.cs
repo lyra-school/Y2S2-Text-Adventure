@@ -36,13 +36,13 @@ namespace Y2S2_Text_Adventure
                 return;
             }
             ListBoxItem selection = (ListBoxItem)lbxThemes.SelectedItem;
-            Window win = Application.Current.MainWindow;
+            //Window win = Application.Current.MainWindow;
             SolidColorBrush bgt = (SolidColorBrush)this.Resources["BackgroundTheme"];
-            SolidColorBrush bgt2 = (SolidColorBrush)win.Resources["BackgroundTheme"];
+            //SolidColorBrush bgt2 = (SolidColorBrush)win.Resources["BackgroundTheme"];
             SolidColorBrush ft = (SolidColorBrush)this.Resources["FontTheme"];
-            SolidColorBrush ft2 = (SolidColorBrush)win.Resources["FontTheme"];
+            //SolidColorBrush ft2 = (SolidColorBrush)win.Resources["FontTheme"];
             SolidColorBrush bt = (SolidColorBrush)this.Resources["BorderTheme"];
-            SolidColorBrush bt2 = (SolidColorBrush)win.Resources["BorderTheme"];
+            //SolidColorBrush bt2 = (SolidColorBrush)win.Resources["BorderTheme"];
             string bgc;
             string fc;
             switch (selection.Name)
@@ -61,11 +61,11 @@ namespace Y2S2_Text_Adventure
                     bgc = "#fffb7a";
                     fc = "#16787b";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
                 case "theme3":
                     bgc = "#ff00ee";

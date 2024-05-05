@@ -81,6 +81,50 @@ namespace Y2S2_Text_Adventure
             }
             ReadOutsideItems(jsons);
         }
+
+        public void ReadScenes(Savedata sd)
+        {
+            string[] paths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\scenes"));
+            string[] itemPaths = Directory.GetFiles(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"data\gamedata\items"));
+            List<string> jsons = new List<string>();
+            foreach (string path in itemPaths)
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    jsons.Add(json);
+                }
+            }
+            foreach (string filename in paths)
+            {
+                SceneData deserializedScene;
+                using (StreamReader r = new StreamReader(filename))
+                {
+                    string json = r.ReadToEnd();
+                    deserializedScene = JsonConvert.DeserializeObject<SceneData>(json);
+                }
+                Scene sc = new Scene(deserializedScene.Name, deserializedScene.Heading, deserializedScene.Description);
+                Scenes.Add(sc);
+                if (sc.Name == sd.SceneName)
+                {
+                    CurrentScene = sc;
+                }
+                for (int i = 0; i < deserializedScene.NeighboringScenes.Length; i++)
+                {
+                    Direction dir;
+                    bool success = Enum.TryParse(deserializedScene.Directions[i], out dir);
+                    if (!success)
+                    {
+                        throw new ArgumentException("Found unrecognized direction: " + deserializedScene.Directions[i]);
+                    }
+                    sc.AddConnection(deserializedScene.NeighboringScenes[i], dir);
+                }
+                
+                ReadAppropriateItems(sc, jsons, deserializedScene.Items, sd.Items);
+            }
+            ReadOutsideItems(jsons, sd.Items);
+        }
+
         public void ReadAppropriateItems(Scene sc, List<string> jsons, string[] itemKeys)
         {
             for (int i = 0; i < jsons.Count; i++)
@@ -111,6 +155,55 @@ namespace Y2S2_Text_Adventure
                 }
             }
         }
+        public void ReadAppropriateItems(Scene sc, List<string> jsons, string[] itemKeys, List<SavedataItem> sdi)
+        {
+            for (int i = 0; i < jsons.Count; i++)
+            {
+                JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
+                for (int j = 0; j < itemKeys.Length; j++)
+                {
+                    if (item["Name"].ToString().Equals(itemKeys[j]))
+                    {
+                        string name = item["Name"].ToString();
+                        string desc = item["Description"].ToString();
+                        string type = item["Type"].ToString();
+                        string insc = item["InSceneDescription"].ToString();
+                        ItemType ttype;
+                        bool success = Enum.TryParse(type, out ttype);
+                        if (!success)
+                        {
+                            throw new ArgumentException("Unrecognized item type: " + type);
+                        }
+                        Item it = new Item(name, desc, insc, ttype);
+                        bool found = false;
+                        foreach(SavedataItem sit in sdi)
+                        {
+                            if(name == sit.SItemName)
+                            {
+                                string itemT = sit.SItemType;
+                                if(itemT == "Inventory")
+                                {
+                                    Inventory.Add(it);
+                                } else
+                                {
+                                    UsedItems.Add(it);
+                                }
+                                found = true;
+                            }
+                        }
+                        if(!found)
+                        {
+                            sc.Items.Add(it);
+                        }
+                        List<JToken> results = item["Interactions"].Children().ToList();
+                        foreach (JToken token in results)
+                        {
+                            LoadInteraction(it, token);
+                        }
+                    }
+                }
+            }
+        }
         public void ReadOutsideItems(List<string> jsons)
         {
             for(int i = 0; i < jsons.Count;i++)
@@ -130,6 +223,53 @@ namespace Y2S2_Text_Adventure
                     }
                     Item it = new Item(name, desc, insc, ttype);
                     Crafted.Add(it);
+                    List<JToken> results = item["Interactions"].Children().ToList();
+                    foreach (JToken token in results)
+                    {
+                        LoadInteraction(it, token);
+                    }
+                }
+            }
+        }
+        public void ReadOutsideItems(List<string> jsons, List<SavedataItem> sdi)
+        {
+            for (int i = 0; i < jsons.Count; i++)
+            {
+                JObject item = (JObject)JsonConvert.DeserializeObject(jsons[i]);
+                if (!(bool)item["PartOfScene"])
+                {
+                    string name = item["Name"].ToString();
+                    string desc = item["Description"].ToString();
+                    string type = item["Type"].ToString();
+                    string insc = item["InSceneDescription"].ToString();
+                    ItemType ttype;
+                    bool success = Enum.TryParse(type, out ttype);
+                    if (!success)
+                    {
+                        throw new ArgumentException("Unrecognized item type: " + type);
+                    }
+                    Item it = new Item(name, desc, insc, ttype);
+                    bool found = false;
+                    foreach (SavedataItem sit in sdi)
+                    {
+                        if (name == sit.SItemName)
+                        {
+                            string itemT = sit.SItemType;
+                            if (itemT == "Inventory")
+                            {
+                                Inventory.Add(it);
+                            }
+                            else
+                            {
+                                UsedItems.Add(it);
+                            }
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        Crafted.Add(it);
+                    }
                     List<JToken> results = item["Interactions"].Children().ToList();
                     foreach (JToken token in results)
                     {

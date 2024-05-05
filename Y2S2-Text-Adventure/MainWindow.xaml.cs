@@ -464,7 +464,11 @@ namespace Y2S2_Text_Adventure
 
         private void btnLoadSaves_Click(object sender, RoutedEventArgs e)
         {
-
+            Savedata selected = (Savedata)lbxSaves.SelectedItem;
+            if(selected == null)
+            {
+                return;
+            }
         }
     }
 }

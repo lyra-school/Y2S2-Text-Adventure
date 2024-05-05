@@ -51,11 +51,11 @@ namespace Y2S2_Text_Adventure
                     bgc = "#2d2d2d";
                     fc = "#ffffff";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
                 case "theme2":
                     bgc = "#fffb7a";
@@ -71,41 +71,41 @@ namespace Y2S2_Text_Adventure
                     bgc = "#ff00ee";
                     fc = "#ffffff";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
                 case "theme4":
                     bgc = "#004104";
                     fc = "#ffd24c";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
                 case "theme5":
                     bgc = "#ffd49b";
                     fc = "#2d2d2d";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
                 case "theme6":
                     bgc = "#7f3a5c";
                     fc = "#9b9bff";
                     bgt.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
-                    bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
+                    //bgt2.Color = Color.FromRgb(Convert.ToByte(bgc.Substring(1, 2), 16), Convert.ToByte(bgc.Substring(3, 2), 16), Convert.ToByte(bgc.Substring(5, 2), 16));
                     ft.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //ft2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     bt.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
-                    bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
+                    //bt2.Color = Color.FromRgb(Convert.ToByte(fc.Substring(1, 2), 16), Convert.ToByte(fc.Substring(3, 2), 16), Convert.ToByte(fc.Substring(5, 2), 16));
                     break;
             }
         }

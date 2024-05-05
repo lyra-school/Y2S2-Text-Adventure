@@ -29,7 +29,7 @@
             <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="8"/>
+                        <Setter Property="Margin" Value="7"/>
                         <Setter Property="Padding" Value="5"/>
                         <Setter Property="Background" Value="{StaticResource BackgroundTheme}"/>
                         <Setter Property="Foreground" Value="{StaticResource FontTheme}"/>
@@ -38,7 +38,7 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button x:Name="btnStart" Content="Start" Click="btnStart_Click"/>
-                <Button x:Name="btnLoad" Content="Load Game"/>
+                <Button x:Name="btnLoad" Content="Load Game" Click="btnLoad_Click"/>
                 <Button x:Name="btnHow" Content="How to Play" Click="btnHow_Click"/>
                 <Button x:Name="btnAbout" Content="About" Click="btnAbout_Click"/>
             </StackPanel>
@@ -94,7 +94,21 @@
             <Button x:Name="btnInventory" Content="Inventory" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
         </Grid>
         <Grid x:Name="gridLoad" Visibility="Collapsed">
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Foreground="{StaticResource FontTheme}" Text="Load Save" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="42" FontFamily="{StaticResource ThornValley}" Padding="5"/>
+            <ListBox x:Name="lbxSaves" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
+            <Button x:Name="btnReturnSaves" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Return" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Padding="10" BorderThickness="2" FontSize="20" Click="btnReturnSaves_Click"/>
+            <Button x:Name="btnLoadSaves" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Load" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" Padding="10" BorderThickness="2" FontSize="20" Click="btnLoadSaves_Click"/>
         </Grid>
         <Grid x:Name="gridHowto" Visibility="Collapsed">
             <Grid.ColumnDefinitions>

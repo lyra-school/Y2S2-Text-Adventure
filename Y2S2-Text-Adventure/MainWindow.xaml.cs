@@ -443,5 +443,28 @@ namespace Y2S2_Text_Adventure
             ThemeSelection themeWindow = new ThemeSelection();
             themeWindow.ShowDialog();
         }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            gridMenu.Visibility = Visibility.Collapsed;
+
+            var query = from s in _db.Savedatas
+                        select s;
+
+            lbxSaves.ItemsSource = query.ToList();
+
+            gridLoad.Visibility = Visibility.Visible;
+        }
+
+        private void btnReturnSaves_Click(object sender, RoutedEventArgs e)
+        {
+            gridLoad.Visibility = Visibility.Collapsed;
+            gridMenu.Visibility = Visibility.Visible;
+        }
+
+        private void btnLoadSaves_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

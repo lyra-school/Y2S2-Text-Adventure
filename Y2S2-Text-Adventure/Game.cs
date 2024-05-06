@@ -386,5 +386,10 @@ namespace Y2S2_Text_Adventure
             return foundItem;
         }
 
+        public void UpdateStatsFromSave(Savedata sd)
+        {
+            Health = sd.Health;
+            Will = sd.Will;
+        }
     }
 }

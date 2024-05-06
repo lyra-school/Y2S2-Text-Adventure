@@ -92,6 +92,8 @@ namespace Y2S2_Text_Adventure
             }
             
             SceneTextUpdater();
+            StatUpdateEvaluate(Statistic.HEALTH);
+            StatUpdateEvaluate(Statistic.WILL);
             lbxInventory.ItemsSource = _observableInventory;
         }
 
@@ -413,7 +415,7 @@ namespace Y2S2_Text_Adventure
             {
                 case Statistic.HEALTH:
                     int currHealth = _game.Health;
-                    rnHealth.Text = "&#x0a;Health: " + currHealth;
+                    rnHealth.Text = "\nHealth: " + currHealth;
                     if(currHealth <= 0)
                     {
                         TextUpdater("You ran out of health! Game over.");
@@ -422,7 +424,7 @@ namespace Y2S2_Text_Adventure
                     break;
                 default:
                     int currWill = _game.Will;
-                    rnWill.Text = "&#x0a;Will: " + currWill;
+                    rnWill.Text = "\nWill: " + currWill;
                     if(currWill <= 0)
                     {
                         TextUpdater("You no longer have the willpower to go on! Game over.");
@@ -469,6 +471,24 @@ namespace Y2S2_Text_Adventure
             {
                 return;
             }
+            gridLoad.Visibility = Visibility.Collapsed;
+            gridGame.Visibility = Visibility.Visible;
+
+            try
+            {
+                _game.ReadScenes(selected);
+                _game.UpdateStatsFromSave(selected);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Error loading files - improper formatting?");
+            }
+
+            SceneTextUpdater();
+            StatUpdateEvaluate(Statistic.HEALTH);
+            StatUpdateEvaluate(Statistic.WILL);
+            _observableInventory = new ObservableCollection<Item>(_game.Inventory);
+            lbxInventory.ItemsSource = _observableInventory;
         }
     }
 }

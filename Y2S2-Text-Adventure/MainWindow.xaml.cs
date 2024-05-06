@@ -143,22 +143,19 @@ namespace Y2S2_Text_Adventure
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using(_db)
+            Savedata sv = new Savedata() { Name = "Regular Save", DateCreated = DateTime.Now, Health = _game.Health, Will = _game.Will, SceneName = _game.CurrentScene.Name };
+            foreach (Item it in _game.Inventory)
             {
-                Savedata sv = new Savedata() { Name="Regular Save", DateCreated=DateTime.Now, Health = _game.Health, Will = _game.Will, SceneName = _game.CurrentScene.Name };
-                foreach(Item it in _game.Inventory)
-                {
-                    SavedataItem sdi = new SavedataItem() { SItemName = it.Name, SItemType = "Inventory" };
-                    sv.Items.Add(sdi);
-                }
-                foreach (Item it in _game.UsedItems)
-                {
-                    SavedataItem sdi = new SavedataItem() { SItemName = it.Name, SItemType = "Used" };
-                    sv.Items.Add(sdi);
-                }
-                _db.Savedatas.Add(sv);
-                _db.SaveChanges();
+                SavedataItem sdi = new SavedataItem() { SItemName = it.Name, SItemType = "Inventory" };
+                sv.Items.Add(sdi);
             }
+            foreach (Item it in _game.UsedItems)
+            {
+                SavedataItem sdi = new SavedataItem() { SItemName = it.Name, SItemType = "Used" };
+                sv.Items.Add(sdi);
+            }
+            _db.Savedatas.Add(sv);
+            _db.SaveChanges();
         }
 
         private void btnPrompt_Click(object sender, RoutedEventArgs e)

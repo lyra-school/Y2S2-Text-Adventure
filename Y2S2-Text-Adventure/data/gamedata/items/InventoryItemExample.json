@@ -23,7 +23,7 @@
       "Description": "You combined these objects.",
       "SecondTarget": "staticexample",
       "Consequence": "COMBINE",
-      "Perishable": false,
+      "Perishable": true,
       "ResultingItem": "craftedexample"
     },
     {

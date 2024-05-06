@@ -81,7 +81,13 @@ namespace Y2S2_Text_Adventure
                     sb.Append(" ");
                 }
             }
-            return $"\n\n{Description}\n\n{sb}";
+            if(sb.Length == 0)
+            {
+                return $"\n\n{Description}";
+            } else
+            {
+                return $"\n\n{Description}\n\n{sb}";
+            }
         }
     }
 }

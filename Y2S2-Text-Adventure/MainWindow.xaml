@@ -56,39 +56,43 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ScrollViewer x:Name="scvwGame" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
-                <TextBlock x:Name="tblkGame"  TextWrapping="Wrap">
-                </TextBlock>
-            </ScrollViewer>
-            <Border Grid.Column="1" Grid.Row="2">
-                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" FontStyle="Italic" Text="Begin typing here..." FontSize="24" GotFocus="tbxPrompt_GotFocus"/>
+            <Border Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{StaticResource BorderTheme}" Margin="0, 10, 0, 0">
+                <ScrollViewer x:Name="scvwGame"  Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}">
+                    <TextBlock x:Name="tblkGame"  TextWrapping="Wrap" Padding="10">
+                    </TextBlock>
+                </ScrollViewer>
             </Border>
-            <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Margin="10" Padding="10" FontSize="16" Visibility="Collapsed">
-                <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
-                <Run Name="rnHealth" Text="&#x0a;Health:" FontSize="18"/>
-                <Run Name="rnWill" Text="&#x0a;Will:" FontSize="18"/>
-            </TextBlock>
-            <Grid x:Name="gridInventory" Grid.Column="3" Grid.RowSpan="2" Margin="10" Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="11*"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="tblkInventory" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Padding="10" FontSize="16">
-                    <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
+            <Border Grid.Column="1" Grid.Row="2" Margin="0, 3, 0, 0">
+                <TextBox x:Name="tbxPrompt" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" FontStyle="Italic" Text="Begin typing here..." FontSize="20" GotFocus="tbxPrompt_GotFocus" VerticalContentAlignment="Center" Padding="10, 0, 10, 0"/>
+            </Border>
+            <Border x:Name="bdStats" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Margin="10" Visibility="Collapsed">
+                <TextBlock x:Name="tblkStats" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Padding="10" FontSize="16">
+                    <Run Text="Statistics" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
+                    <Run Name="rnHealth" Text="&#x0a;Health:" FontSize="18"/>
+                    <Run Name="rnWill" Text="&#x0a;Will:" FontSize="18"/>
                 </TextBlock>
-                <ListBox x:Name="lbxInventory" Grid.Row="1" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderThickness="0">
-                    
-                </ListBox>
-            </Grid>
+            </Border>
+            <Border x:Name="bdInventory" Grid.Column="3" Grid.RowSpan="2" Margin="10, 10, 10, 0" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Visibility="Collapsed">
+                <Grid x:Name="gridInventory">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="11*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="tblkInventory" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" Padding="10" FontSize="16">
+                        <Run Text="Inventory" FontSize="28" FontFamily="{StaticResource ThornValley}"/>
+                    </TextBlock>
+                    <ListBox x:Name="lbxInventory" Grid.Row="1" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderThickness="0"/>
+                </Grid>
+            </Border>
             <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="0, 40, 0, 0"/>
+                        <Setter Property="Margin" Value="0, 30, 0, 0"/>
                         <Setter Property="Padding" Value="10"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSave_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
                 <Button x:Name="btnStats" Content="Stats" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnStats_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
+                <Button x:Name="btnSave" Content="Save" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSave_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2"/>
             </StackPanel>
             <Button x:Name="btnPrompt" Content="Send" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnPrompt_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>
             <Button x:Name="btnInventory" Content="Inventory" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnInventory_Click" Background="{StaticResource BackgroundTheme}" Foreground="{StaticResource FontTheme}" BorderBrush="{StaticResource BorderTheme}" BorderThickness="2" Padding="10"/>

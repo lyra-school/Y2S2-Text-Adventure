@@ -104,12 +104,12 @@ namespace Y2S2_Text_Adventure
         /// <param name="e"></param>
         private void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            if(tblkStats.Visibility == Visibility.Visible)
+            if(bdStats.Visibility == Visibility.Visible)
             {
-                tblkStats.Visibility = Visibility.Collapsed;
+                bdStats.Visibility = Visibility.Collapsed;
             } else
             {
-                tblkStats.Visibility = Visibility.Visible;
+                bdStats.Visibility = Visibility.Visible;
             }
         }
 
@@ -120,12 +120,12 @@ namespace Y2S2_Text_Adventure
         /// <param name="e"></param>
         private void btnInventory_Click(object sender, RoutedEventArgs e)
         {
-            if(gridInventory.Visibility == Visibility.Visible)
+            if(bdInventory.Visibility == Visibility.Visible)
             {
-                gridInventory.Visibility = Visibility.Collapsed;
+                bdInventory.Visibility = Visibility.Collapsed;
             } else
             {
-                gridInventory.Visibility = Visibility.Visible;
+                bdInventory.Visibility = Visibility.Visible;
             }
         }
 

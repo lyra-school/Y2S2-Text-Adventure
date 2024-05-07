@@ -179,8 +179,7 @@
                     <TextBlock.Inlines>
                         <Run Text="This is an end-of-year school project done for the Object Oriented Development class."/>
                         <Run FontWeight="Bold" Text="&#x0a;&#x0a;Credits:"/>
-                        <Run Text="&#x0a;&#x0a;Development: S00233718"/>
-                        <Run Text="&#x0a;&#x0a;Writing: An anonymous friend"/>
+                        <Run Text="&#x0a;&#x0a;Development and Writing: S00233718"/>
                         <Run Text="&#x0a;&#x0a;Custom Font: RavenEXP @ 1001fonts.com"/>
                     </TextBlock.Inlines>
                 </TextBlock>

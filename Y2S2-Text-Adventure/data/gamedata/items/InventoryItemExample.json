@@ -1,26 +1,26 @@
 {
   "Name": "invexample",
   "PartOfScene": true,
-  "Description": "This description appears when used with LOOK.",
+  "Description": "You LOOKed at the inv example.",
   "Type": "INVENTORY",
-  "InSceneDescription": "This description is only used by INVENTORY objects and appears in a scene before being picked up.",
+  "InSceneDescription": "You see an 'invexample' propped up against the pure, white nothing of this scene. This description is only used by INVENTORY objects and appears in a scene before being picked up.",
   "Interactions": [
     {
       "Action": "ATTACK",
-      "Description": "You attacked this object.",
+      "Description": "You punched the inv example. You feel really bad about it.",
       "Consequence": "STAT_CHANGE",
-      "Penalty": "HEALTH",
-      "PenaltyAmount": -1,
-      "PenaltyChance": 0.5
+      "Penalty": "WILL",
+      "PenaltyAmount": -5,
+      "PenaltyChance": 1.0
     },
     {
       "Action": "EAT",
-      "Description": "You ate this object.",
+      "Description": "You licked the inv example. It doesn't taste very good.",
       "Consequence": "NONE"
     },
     {
       "Action": "EAT",
-      "Description": "You combined these objects.",
+      "Description": "By simultaneously dining on the two objects, the inv example disappearing into your belly, you summoned a world-ending 'craftedexample'. Why does it say 'do not eat in ANY circumstance'?",
       "SecondTarget": "staticexample",
       "Consequence": "COMBINE",
       "Perishable": true,
@@ -28,13 +28,20 @@
     },
     {
       "Action": "TAKE",
-      "Description": "You took this object.",
+      "Description": "You picked up the inv example. It's kind of squishy.",
       "Consequence": "NONE"
     },
     {
       "Action": "USE",
-      "Description": "You used this object.",
+      "Description": "You took a selfie with the inv example.",
       "Consequence": "NONE"
+    },
+    {
+      "Action": "USE",
+      "Description": "You did a thing to the static example using the inv example and... you disappeared!",
+      "SecondTarget": "staticexample",
+      "Consequence": "ADVANCE",
+      "Penalty": "sceneexample2"
     }
   ]
 }

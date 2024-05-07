@@ -1,13 +1,13 @@
 {
   "Name": "staticexample",
   "PartOfScene": true,
-  "Description": "This description appears when used with LOOK.",
+  "Description": "You LOOKed at the static example.",
   "Type": "STATIC",
-  "InSceneDescription": "This description is not used in this type of object. Static objects should be part of the scene's descrption.",
+  "InSceneDescription": "This description is not used in this type of object. Static objects should be part of the scene's description.",
   "Interactions": [
     {
       "Action": "ATTACK",
-      "Description": "You attacked this object.",
+      "Description": "You punched the static example, bruising your knuckles.",
       "Consequence": "STAT_CHANGE",
       "Penalty": "HEALTH",
       "PenaltyAmount": -1,
@@ -15,12 +15,12 @@
     },
     {
       "Action": "EAT",
-      "Description": "You ate this object.",
+      "Description": "You licked the object. Nothing happened.",
       "Consequence": "NONE"
     },
     {
       "Action": "EAT",
-      "Description": "You combined these objects.",
+      "Description": "By simultaneously dining on the two objects, the inv example disappearing into your belly, you summoned a world-ending 'craftedexample'. Why does it say 'do not eat in ANY circumstance'?",
       "SecondTarget": "invexample",
       "Consequence": "COMBINE",
       "Perishable": false,
@@ -28,17 +28,17 @@
     },
     {
       "Action": "TAKE",
-      "Description": "You took this object.",
+      "Description": "While this interaction can be defined for a static object, it will never be used.",
       "Consequence": "NONE"
     },
     {
       "Action": "USE",
-      "Description": "You used this object.",
+      "Description": "You did a thing to the static example. You're not even sure what exactly you did.",
       "Consequence": "NONE"
     },
     {
       "Action": "USE",
-      "Description": "You used this object with another object.",
+      "Description": "You did a thing to the static example using the inv example and... you disappeared!",
       "SecondTarget": "invexample",
       "Consequence": "ADVANCE",
       "Penalty": "sceneexample2"

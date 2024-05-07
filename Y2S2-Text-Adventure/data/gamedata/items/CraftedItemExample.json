@@ -1,13 +1,13 @@
 ﻿{
   "Name": "craftedexample",
   "PartOfScene": false,
-  "Description": "This description appears when used with LOOK.",
+  "Description": "You LOOKed at the cursed crafted example.",
   "Type": "INVENTORY",
-  "InSceneDescription": "This field is never used for crafted items in the current version of the program, as crafted items are confined to the inventory.",
+  "InSceneDescription": "This field is never used for crafted items in the current version of the program, as crafted items are confined to the inventory out of which no item can drop.",
   "Interactions": [
     {
       "Action": "ATTACK",
-      "Description": "You attacked this object.",
+      "Description": "You kicked the crafted example. Your foot is sore.",
       "Consequence": "STAT_CHANGE",
       "Penalty": "HEALTH",
       "PenaltyAmount": -1,
@@ -15,17 +15,17 @@
     },
     {
       "Action": "EAT",
-      "Description": "You ate this object.",
+      "Description": "By eating the crafted example, the void collapsed into even more of a nothing than it was. This now includes your entire existence. The end.",
       "Consequence": "FINAL"
     },
     {
       "Action": "TAKE",
-      "Description": "You took this object.",
+      "Description": "This interaction can be defined but has no use right now due to the inability to drop inventory items.",
       "Consequence": "NONE"
     },
     {
       "Action": "USE",
-      "Description": "You used this object.",
+      "Description": "The crafted example wrapped its formless limbs around your waist, pulling you closer to it. You waltzed to the sound of silence for hours and hours until it accidentally dropped you.",
       "Consequence": "NONE"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "Name": "sceneexample",
-  "Heading": "Stylized name of the scene used in transitions",
-  "Description": "This is accessed by either LOOK on its own when in a given scene or when the scene is visited through GO/an advance interaction.",
+  "Heading": "The First Scene",
+  "Description": "Description of the first scene. This is accessed by either LOOK on its own when in a given scene or when the scene is visited through GO/an advance interaction.\n\nA hole in the void to the WEST seems to lead out of this place. Out of the corner of your eye, you see a 'staticexample' lying on the blank, white floor.",
   "NeighboringScenes": [ "sceneexample2" ],
   "Directions": [ "WEST" ],
   "Items": ["invexample", "staticexample"]

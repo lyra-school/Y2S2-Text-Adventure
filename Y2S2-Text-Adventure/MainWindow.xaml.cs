@@ -235,15 +235,17 @@ namespace Y2S2_Text_Adventure
                 {
                     // If no fault is caught, changes a player's target scene to the one in the appropriate direction. Scene description is sent for the new one.
                     Scene transition = new Scene();
+                    string head = "";
                     foreach (Scene scene in _game.Scenes)
                     {
                         if (scene.Name == nextScene)
                         {
                             transition = scene;
+                            head = scene.Heading.ToLower();
                         }
                     }
                     _game.CurrentScene = transition;
-                    TextUpdater("You head over to " + nextScene + ".");
+                    TextUpdater("You head over to " + head + ".");
                     SceneTextUpdater();
                     return;
                 }

@@ -24,17 +24,34 @@ namespace Y2S2_Text_Adventure
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Closes the window when the Return button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReturnTheme_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Changes the UI theme to the selected option when the Accept button is clicked, but only for the ThemeSelection window.
+        /// The original method was intended to target the MainWindow themes as well, but due to a limitation with WPF, any attempt to reach it through this window reports that its resources are frozen.
+        /// This isn't solved by using Show() to display this window.
+        /// The window and the method are preserved for the sake of demonstration.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAcceptTheme_Click(object sender, RoutedEventArgs e)
         {
+            // Do nothing if the user hasn't selected anything.
             if(lbxThemes.SelectedItem == null)
             {
                 return;
             }
+
+            // Gets the selected theme as well as appropriate resoures from ThemeSelection window.
+            // The commented code is how it would be done for MainWindow, but will result in an exception if ran as it is.
             ListBoxItem selection = (ListBoxItem)lbxThemes.SelectedItem;
             //Window win = Application.Current.MainWindow;
             SolidColorBrush bgt = (SolidColorBrush)this.Resources["BackgroundTheme"];
@@ -43,6 +60,12 @@ namespace Y2S2_Text_Adventure
             //SolidColorBrush ft2 = (SolidColorBrush)win.Resources["FontTheme"];
             SolidColorBrush bt = (SolidColorBrush)this.Resources["BorderTheme"];
             //SolidColorBrush bt2 = (SolidColorBrush)win.Resources["BorderTheme"];
+
+            /*
+             * Hacky way of changing colours. WPF offers no way to extract a Color object from Brush (which is how Background is stored in a ListBoxItem.)
+             * Instead, each ListBoxItem is given a name that corresponds to specific two colour hexes, segments of which are converted into bytes when applied to the resource.
+             * All bytes are in R, G, B order.
+             */
             string bgc;
             string fc;
             switch (selection.Name)

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Y2S2_Text_Adventure
 {
+
+    /// <summary>
+    /// Data class used for quick Json.NET deserialization.
+    /// </summary>
     internal class SceneData
     {
         public string Name { get; set; }
